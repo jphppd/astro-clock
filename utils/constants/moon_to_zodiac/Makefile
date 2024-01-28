@@ -1,0 +1,1 @@
+$(CURDIR)/utils/constants/moon_to_zodiac/structure.scad: $(CURDIR)/utils/constants/moon_to_zodiac/env.py
