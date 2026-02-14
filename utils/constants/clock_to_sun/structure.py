@@ -13,8 +13,19 @@ DATA = {
     "6a_offset": 3,
 }
 
+#
+#       A
+#   O        B
+#              C
+#                D
+# O = gear 7
+# A = gear 4, 6
+# B = gear 3, 5
+# C = gear 2
+# D = gear 1
+
 rOA = (env.DATA["6b_n"] + env.DATA["7_n"]) * env.DATA["6b_7_mod"] / 2
-rAB = (env.DATA["5b_n"] + env.DATA["6a_n"]) * env.DATA["mod"] / 2
+rAB = (env.DATA["3b_n"] + env.DATA["4a_n"]) * env.DATA["3b_4a_mod"] / 2
 rBC = (env.DATA["3a_n"] + env.DATA["2b_n"]) * env.DATA["2b_3a_mod"] / 2
 rCD = (env.DATA["1_n"] + env.DATA["2a_n"]) * env.DATA["1_2a_mod"] / 2
 
@@ -75,12 +86,6 @@ assert not math.isnan(rOB)
 assert not math.isnan(rOC)
 assert not math.isnan(rOD)
 
-
-#
-#       A
-#   O        B
-#              C
-#                D
 
 DATA = {
     **DATA,

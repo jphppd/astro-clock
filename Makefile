@@ -19,7 +19,6 @@ clean:
 	@rm --force clock.blend
 
 
-clock.blend: parts_merger.py $(STL_FILES)
+clock.blend: parts_merger.py $(STL_FILES) $(PY_FILES)
 	@rm --force $@
 	blender --background --python parts_merger.py
-

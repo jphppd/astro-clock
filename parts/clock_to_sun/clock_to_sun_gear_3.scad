@@ -6,7 +6,7 @@ include <../../utils/constants/constants.scad>
 na = clock_to_sun_3a_n;
 nb = clock_to_sun_3b_n;
 ma = clock_to_sun_2b_3a_mod;
-mb = clock_to_sun_mod;
+mb = clock_to_sun_3b_4a_mod;
 
 scale([global_scale, global_scale, 1])
   difference() {

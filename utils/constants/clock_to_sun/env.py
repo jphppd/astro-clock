@@ -1,23 +1,28 @@
 from fractions import Fraction
 
 DATA = {
-    "mod": 1.4,
-    "1_2a_mod": 1.3,
-    "2b_3a_mod": 1.45,
-    "6b_7_mod": 1.6,
+    "1_2a_mod": 1.2,
+    "2b_3a_mod": 1.55,
+    "3b_4a_mod": 1.35,
+    "6b_7_mod": 1.72,
     "1_n": 23,
     "2a_n": 50,
-    "2b_n": 27,
+    "2b_n": 21,
     "3a_n": 50,
-    "3b_n": 16,
-    "4a_n": 64,
-    "4b_n": 16,
-    "5a_n": 64,
-    "5b_n": 16,
-    "6a_n": 64,
-    "6b_n": 16,
-    "7_n": 96,
+    "3b_n": 15,
+    "4a_n": 68,
+    "4b_n": 17,
+    "5a_n": 60,
+    "5b_n": 23,
+    "6a_n": 70,
+    "6b_n": 15,
+    "7_n": 92,
 }
+
+
+DATA["4b_5a_mod"] = DATA["3b_4a_mod"] * (DATA["3b_n"] + DATA["4a_n"]) / (DATA["4b_n"] + DATA["5a_n"])
+DATA["5b_6a_mod"] = DATA["3b_4a_mod"] * (DATA["3b_n"] + DATA["4a_n"]) / (DATA["5b_n"] + DATA["6a_n"])
+
 
 ratio_1_2 = Fraction(DATA["1_n"], DATA["2a_n"])
 ratio_2_3 = Fraction(DATA["2b_n"], DATA["3a_n"])

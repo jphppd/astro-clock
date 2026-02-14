@@ -17,9 +17,9 @@ scale([global_scale, global_scale, 1])
     }
     circular_hole(radius = gears_shaft_radius, length = 2);
 
-    for(theta = [0:360 / 16:360])
-      circular_hole(r = 4 / 5 * na * ma / 2, theta = theta, radius = 1 / 22 * na * ma);
+    for(theta = [0:360 / 12:360])
+      circular_hole(r = 3 / 4 * na * ma / 2, theta = theta, radius = 1 / 20 * na * ma);
 
     for(theta = [0:360 / 8:360])
-      circular_hole(r = 1 / 3 * na * ma / 2, theta = theta, radius = 1 / 22 * na * ma, length = 2);
+      circular_hole(r = 1 / 3 * na * ma / 2, theta = theta, radius = 1 / 30 * na * ma, length = 2);
   }
