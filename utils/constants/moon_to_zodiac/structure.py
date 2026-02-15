@@ -18,7 +18,7 @@ def cosine_law_alpha(b, c, a):
 
 
 DATA = {
-    "theta": 1 / 10 * pi,
+    "theta": 9 / 10 * pi,
     "1_r": 0.0,
     "1_theta": 0.0,
     "5_r": 0.0,

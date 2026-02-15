@@ -30,5 +30,5 @@ clock.blend: detect_collisions parts_merger.py $(STL_FILES) $(PY_FILES)
 
 
 rwildcard=$(foreach d,$(wildcard $(1:=/*)),$(call rwildcard,$d,$2) $(filter $(subst *,%,$2),$d))
-ALL_STL_DEPS := $(call rwildcard,parts/structure,*.deps)
+ALL_STL_DEPS := $(call rwildcard,parts,*.deps)
 -include $(ALL_STL_DEPS)

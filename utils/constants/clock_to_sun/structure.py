@@ -25,8 +25,8 @@ rBC = (env.DATA["3a_n"] + env.DATA["2b_n"]) * env.DATA["2b_3a_mod"] / 2
 rCD = (env.DATA["1_n"] + env.DATA["2a_n"]) * env.DATA["1_2a_mod"] / 2
 
 
-rOD = 135 / 0.75
-thetaOA = math.radians(-32) - DATA["theta"]
+rOD = 128 / 0.75
+thetaOA = math.radians(-30) - DATA["theta"]
 thetaAB = math.radians(-90) - DATA["theta"]
 thetaOD = -math.radians(90) - DATA["theta"]
 

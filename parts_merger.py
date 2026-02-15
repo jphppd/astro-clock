@@ -311,13 +311,7 @@ def position_motor(parts):
         parts["motor_case"],
         STRUCT["clock_to_sun"]["1_r"] * CONSTANTS["global_scale"],
         3 / 2 * pi,
-        (OFFSET_CARRIER["2"] + 1 / 2) * GT,
-    )
-    translate(
-        parts["motor_cap"],
-        STRUCT["clock_to_sun"]["1_r"] * CONSTANTS["global_scale"],
-        3 / 2 * pi,
-        (OFFSET_CARRIER["2"] + 1 / 2) * GT,
+        (OFFSET_CARRIER["2"]) * GT,
     )
 
 

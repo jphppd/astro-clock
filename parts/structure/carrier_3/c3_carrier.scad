@@ -39,4 +39,7 @@ scale([global_scale, global_scale, 1])
       sun_to_lunar_nodes_drill();
     rotate(sun_to_lunar_phases_theta)
       sun_to_lunar_phases_drill();
+
+    rotate(-90)
+      circular_hole(r = carrier_outer_radius, theta = 0);
   }
