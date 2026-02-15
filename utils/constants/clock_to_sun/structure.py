@@ -14,15 +14,10 @@ DATA = {
 }
 
 #
-#       A
-#   O        B
-#              C
-#                D
-# O = gear 7
-# A = gear 4, 6
-# B = gear 3, 5
-# C = gear 2
-# D = gear 1
+#       A[4,6]
+# O[7]        B[3,5]
+#                 C[2]
+#                  D[1]
 
 rOA = (env.DATA["6b_n"] + env.DATA["7_n"]) * env.DATA["6b_7_mod"] / 2
 rAB = (env.DATA["3b_n"] + env.DATA["4a_n"]) * env.DATA["3b_4a_mod"] / 2
@@ -55,12 +50,12 @@ F = [
 ]
 gb = sympy.groebner(F, xBC, yBC, xCD, yCD, order="grlex")
 
-value_yCD, value_xBC = sympy.solve_poly_system(gb[0:2], yCD, xBC)[0]
+value_yCD, value_xBC = sympy.solve_poly_system(gb[0:2], yCD, xBC)[0]  # type: ignore
 rules = {yCD: value_yCD, xBC: value_xBC}
 
-value_xCD, value_yBC = sympy.solve_poly_system(
+value_xCD, value_yBC = sympy.solve_poly_system(  # type: ignore
     [gb[2].subs(rules), gb[3].subs(rules)], xCD, yBC
-)[0]
+)[0]  # type: ignore
 
 
 xOA = float(xOA)
@@ -105,4 +100,7 @@ DATA = {
     "6a_theta": thetaOA,
     "6b_theta": thetaOA,
     "7_theta": 0,
+    "dist_25": rBC,
+    "dist_36": rAB,
+    "gears": env.DATA,
 }

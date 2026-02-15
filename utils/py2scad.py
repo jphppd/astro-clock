@@ -24,6 +24,8 @@ def main(source_path, target_path):
             continue
         if key.endswith("theta"):
             value = degrees(value)
+        if key == "gears":
+            continue
         target_text.append(f"{prefix}{key} = {value};")
 
     target_text = "\n".join(sorted(target_text))

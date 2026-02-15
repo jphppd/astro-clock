@@ -31,6 +31,7 @@ DATA = {
     "5_offset": 3,
     "2_mirror": True,
     "c2_mirror": True,
+    "gears": env.DATA,
 }
 a214 = DATA["aperture_theta"]
 d12 = (env.DATA["1_n"] + env.DATA["2a_n"]) * env.DATA["mod"] / 2

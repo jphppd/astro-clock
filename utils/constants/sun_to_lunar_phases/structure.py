@@ -33,6 +33,7 @@ DATA = {
     "5_offset": 3,
     "6_offset": 8,
     "7_offset": 9,
+    "gears": env.DATA,
 }
 
 DATA["4_r"] = DATA["2_r"]

@@ -16,11 +16,15 @@ clean:
 	@find parts -type f -name '*.stl' -delete
 	@find parts -type f -name '*.deps' -delete
 	@find parts -type f -name '*.pyc' -delete
-	@find utils/constants -type f -name "*scad" -delete
+	@find $(CURDIR)/utils/constants -type f -name "*scad" -delete
 	@rm --force clock.blend
 
 
-clock.blend: parts_merger.py $(STL_FILES) $(PY_FILES)
+.PHONY: detect_collisions
+detect_collisions: $(CURDIR)/utils/detect_collisions.py
+	python3 $<
+
+clock.blend: detect_collisions parts_merger.py $(STL_FILES) $(PY_FILES)
 	@rm --force $@
 	blender --background --python parts_merger.py
 

@@ -9,4 +9,5 @@ DATA = {
     "1_offset": 0,
     "2_offset": 0,
     "3_offset": 1,
+    "gears": env.DATA,
 }
