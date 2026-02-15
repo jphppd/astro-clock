@@ -14,8 +14,9 @@ DATA = {
     "gears_shaft_radius": 4.0,
     "sun_shaft_radius": 20.0,
     "lunar_phases_shaft_radius": 6.0,
-    "clock_shaft_radius": 7.0,
+    "clock_shaft_radius": 7.1 / 2,
     "obs_latitude": 47.7343,
+    "motor_shaft_diameter": 3.1,
 }
 
 DATA.update(

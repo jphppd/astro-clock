@@ -5,15 +5,16 @@ include <../../../utils/constants/constants.scad>
 include <../../../utils/constants/structure.scad>
 
 module clock_to_sun() {
-  for(angle = [clock_to_sun_2_theta, clock_to_sun_3_theta, clock_to_sun_4_theta]) {
+  for(angle = [clock_to_sun_1_theta, clock_to_sun_2_theta, clock_to_sun_3_theta, clock_to_sun_4_theta]) {
     rotate(angle)
       spoke();
   }
 
   mirror([0, 0, 1]) {
-    circular_shaft(r = clock_to_sun_2_r, theta = clock_to_sun_2_theta, length = 5, radius = gears_shaft_radius + spacer_sleeve);
-    circular_shaft(r = clock_to_sun_3_r, theta = clock_to_sun_3_theta, length = 3, radius = gears_shaft_radius + spacer_sleeve);
-    circular_shaft(r = clock_to_sun_4_r, theta = clock_to_sun_4_theta, length = 3, radius = gears_shaft_radius + spacer_sleeve);
+    circular_shaft(r = clock_to_sun_1_r, theta = clock_to_sun_1_theta, length = 2, radius = gears_shaft_radius);
+    circular_shaft(r = clock_to_sun_2_r, theta = clock_to_sun_2_theta, length = 4, radius = gears_shaft_radius + spacer_sleeve);
+    circular_shaft(r = clock_to_sun_3_r, theta = clock_to_sun_3_theta, length = 2, radius = gears_shaft_radius + spacer_sleeve);
+    circular_shaft(r = clock_to_sun_4_r, theta = clock_to_sun_4_theta, length = 2, radius = gears_shaft_radius + spacer_sleeve);
   }
 }
 
