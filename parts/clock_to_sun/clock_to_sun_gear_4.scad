@@ -15,7 +15,7 @@ scale([global_scale, global_scale, 1])
       translate(v=[0, 0, gear_thickness - eps])
         default_gear(nb, mb, invert=true);
     }
-    circular_hole(radius=gears_shaft_radius + spacer_sleeve, length=2);
+    circular_hole(radius=gears_shaft_radius + spacer_sleeve + 1, length=2);
 
     for (theta = [0:360 / 8:360])
       circular_hole(r=2 / 3 * na * ma / 2, theta=theta, radius=1 / 15 * na * ma);

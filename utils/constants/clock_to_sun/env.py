@@ -2,9 +2,9 @@ from fractions import Fraction
 import math
 
 DATA = {
-    "1_2a_mod": 1.2,
+    "1_2a_mod": 1.6,
     "2b_3a_mod": 1.55,
-    "3b_4a_mod": 1.35,
+    "3b_4a_mod": 1.4,
     "6b_7_mod": 1.72,
     "1_n": 23,
     "2a_n": 50,
