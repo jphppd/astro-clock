@@ -78,8 +78,6 @@ COLORS = {
     "evening_astro_twilight": (238, 93, 108),
     "evening_nautical_twilight": (251, 144, 98),
     "evening_civil_twilight": (238, 175, 97),
-    "motor_case": (235, 228, 155),
-    "motor_cap": (235, 228, 155),
 }
 
 
@@ -306,15 +304,6 @@ def position_tympan(parts):
         bpy.data.objects.remove(part)
 
 
-def position_motor(parts):
-    translate(
-        parts["motor_case"],
-        STRUCT["clock_to_sun"]["1_r"] * CONSTANTS["global_scale"],
-        3 / 2 * pi,
-        (OFFSET_CARRIER["2"]) * GT,
-    )
-
-
 def clean_first_elements():
     for obj in bpy.data.objects:
         bpy.data.objects.remove(obj)
@@ -333,7 +322,6 @@ def main():
     position_structure(parts["structure"])
     position_spacers(parts["structure"]["spacers"])
     position_tympan(parts["tympan"])
-    position_motor(parts["motor"])
 
     set_view()
 
