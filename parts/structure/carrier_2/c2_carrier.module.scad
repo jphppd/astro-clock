@@ -41,16 +41,16 @@ module carrier_without_motor() {
     rotate(sun_to_lunar_phases_theta)
       sun_to_lunar_phases_drill();
 
-    rotate(-90)
+    for(theta=[-90-13,-90+13])
+    rotate(theta)
       circular_hole(r = carrier_outer_radius, theta = 0);
   }
 }
 
 module carrier()translate([0, 0, -layer_thickness / 2]) {
-  scale([global_scale, global_scale, 1]) {
+  scale([global_scale, global_scale, 1])
     carrier_without_motor();
-    motor_support();
-  }
+    
 
   translate([0, -clock_to_sun_1_r * global_scale, 0])
     rotate(90)
@@ -59,5 +59,3 @@ module carrier()translate([0, 0, -layer_thickness / 2]) {
 
 
 carrier();
-
-
