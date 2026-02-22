@@ -52,20 +52,20 @@ function fn_scale(points, scal) =
       ]
   ];
 function fn_rotate(points, angle) = //
-  let (s = sin(angle), //
-  c = cos(angle) //
-  ) //
+  let (s = sin(angle), c = cos(angle)) //
     [
-      for (point = points) //
+      for (point = points)
+        is_undef(point.z) ? //
+        [c * point.x - s * point.y, s * point.x + c * point.y] : //
         [c * point.x - s * point.y, s * point.x + c * point.y, point.z] //
     ];
 function fn_rotate_and_scale(points, angle, scale) = //
-  let (s = scale * sin(angle), //
-  c = scale * cos(angle) //
-  ) //
+  let (s = scale * sin(angle), c = scale * cos(angle)) //
     [
       for (point = points)
-        [c * point.x - s * point.y, s * point.x + c * point.y, point.z]
+        is_undef(point.z) ? //
+        [c * point.x - s * point.y, s * point.x + c * point.y] : //
+        [c * point.x - s * point.y, s * point.x + c * point.y, point.z] //
     ];
 
 /**
@@ -590,7 +590,7 @@ function fn_gear(n, m, layers, bevel_cone_angle = 0) =
   ) //
     [extruded_profile, faces];
 
-module spur_gear(n, m, thickness = layer_thickness, bevel_cone_angle = 0) {
+module spur_gear(n, m, thickness, bevel_cone_angle = 0) {
   layers = [
     [0, 0], 
     [thickness, 0]
@@ -599,7 +599,7 @@ module spur_gear(n, m, thickness = layer_thickness, bevel_cone_angle = 0) {
   polyhedron(ep_f[0], ep_f[1]);
 }
 
-module helical_gear(n, m, thickness = layer_thickness, invert = false, helix_angle = 20, bevel_cone_angle = 0) {
+module helical_gear(n, m, thickness, invert = false, helix_angle = 20, bevel_cone_angle = 0) {
   twist = (invert ? -1 : 1) * tan(helix_angle) * thickness / (n * m) * 180 / PI;
   layers = [
     [0, -twist], 
@@ -609,7 +609,7 @@ module helical_gear(n, m, thickness = layer_thickness, invert = false, helix_ang
   polyhedron(ep_f[0], ep_f[1]);
 }
 
-module herringbone_gear(n, m, thickness = layer_thickness, invert = false, helix_angle = 20, bevel_cone_angle = 0) {
+module herringbone_gear(n, m, thickness = gear_thickness, invert = false, helix_angle = 20, bevel_cone_angle = 0) {
   twist = (invert ? -1 : 1) * tan(helix_angle) * thickness / (n * m) * 180 / PI;
   layers = [
     [0, twist], 
@@ -637,11 +637,10 @@ function fn_gear_profile_partial(n, n_partial, $fn = 32) =
   )
     concat(fn_pop_first(teeth), cylinder_dedendum);
 
-function anti_gear(n, m, thickness = layer_thickness, $fn = 32) =
+function fn_anti_gear(n, m, $fn = 32) =
   let ( //
-  c = cos(180 / n), //
-  s = sin(180 / n), //
-  flank = fn_flank_and_root(n), //
+  c = cos(180 / n), s = sin(180 / n), //
+  flank = fn_flank_and_root(n)[0], //
   flank_left = [
     for (pt = flank)
       [c * pt.x + s * pt.y, -s * pt.x + c * pt.y]
@@ -659,3 +658,11 @@ function anti_gear(n, m, thickness = layer_thickness, $fn = 32) =
   ] //
   )
     fn_scale(concat(anti_tooth, cylinder_addendum), m);
+
+module anti_gear(n, m, thickness, belt_thickness = 0)linear_extrude(thickness)
+  for(theta = [0:360 / n:360])
+    rotate(theta)
+      difference() {
+        circle(r = m * fn_r_addendum(n, 0, 0) + belt_thickness, $fn = 64);
+        polygon(fn_anti_gear(n, m));
+      }
