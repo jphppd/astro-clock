@@ -25,11 +25,11 @@ module moon_to_zodiac() {
 module moon_to_zodiac_drill() {
 }
 
-scale([global_scale, global_scale, 1])
-  difference() {
-    union() {
-      base_structure();
-      moon_to_zodiac();
-    }
-    moon_to_zodiac_drill();
+
+difference() {
+  union() {
+    base_structure();
+    moon_to_zodiac();
   }
+  moon_to_zodiac_drill();
+}

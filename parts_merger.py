@@ -22,8 +22,8 @@ from utils.constants.constants import DATA as CONSTANTS
 from utils.constants.structure import DATA as STRUCT_CONSTANTS
 
 
-SCALE = 1e-3 * CONSTANTS["global_scale"]
-GT = CONSTANTS["layer_thickness"] * SCALE
+SCALE = 1e-3
+LAYER_THICKNESS = CONSTANTS["layer_thickness"]
 
 OFFSET_CARRIER = {}
 OFFSET_CARRIER["1"] = 0
@@ -151,7 +151,11 @@ def translate(part, radius: float, rotation: float, depth: float, mirror=False):
             orient_axis="Z",
         )
     bpy.ops.transform.translate(
-        value=[depth, cos(rotation) * radius * SCALE, sin(rotation) * radius * SCALE]
+        value=[
+            depth * SCALE * CONSTANTS["global_scale"],
+            cos(rotation) * radius * SCALE * CONSTANTS["global_scale"],
+            sin(rotation) * radius * SCALE * CONSTANTS["global_scale"],
+        ]
     )
     part.select_set(False)
 
@@ -169,54 +173,60 @@ def rotate(part, rotation: float):
 def position_spacers(parts):
     translate(
         parts["c1_c2"],
-        STRUCT_CONSTANTS["carrier_outer_radius"] * CONSTANTS["global_scale"],
+        STRUCT_CONSTANTS["carrier_outer_radius"],
         0,
-        (OFFSET_CARRIER["1"] + 1) * GT,
+        (OFFSET_CARRIER["1"] + 1) * LAYER_THICKNESS,
     )
     translate(
         parts["c2_c3"],
-        STRUCT_CONSTANTS["carrier_outer_radius"] * CONSTANTS["global_scale"],
+        STRUCT_CONSTANTS["carrier_outer_radius"],
         0,
-        (OFFSET_CARRIER["2"] + 1) * GT,
+        (OFFSET_CARRIER["2"] + 1) * LAYER_THICKNESS,
     )
 
 
 def position_shafts(parts):
     translate(
-        parts["shafts"]["moon_shaft"], 0, 0, (STRUCT["sun_to_moon"]["offset"] - 1) * GT
+        parts["shafts"]["moon_shaft"],
+        0,
+        0,
+        (STRUCT["sun_to_moon"]["offset"] - 1) * LAYER_THICKNESS,
     )
     translate(
         parts["shafts"]["zodiac_shaft"],
         0,
         0,
-        (STRUCT["moon_to_zodiac"]["offset"] + 3) * GT,
+        (STRUCT["moon_to_zodiac"]["offset"] + 3) * LAYER_THICKNESS,
     )
     translate(
         parts["shafts"]["lunar_nodes_shaft"],
         0,
         0,
-        (STRUCT["sun_to_lunar_nodes"]["offset"] + 1) * GT,
+        (STRUCT["sun_to_lunar_nodes"]["offset"] + 1) * LAYER_THICKNESS,
     )
     translate(
-        parts["shafts"]["sun_shaft"], 0, 0, (STRUCT["clock_to_sun"]["offset"] - 2) * GT
+        parts["shafts"]["sun_shaft"],
+        0,
+        0,
+        (STRUCT["clock_to_sun"]["offset"] - 2) * LAYER_THICKNESS,
     )
     translate(
         parts["shafts"]["moon_internal_shaft"],
-        STRUCT["sun_to_moon"]["2_r"] * CONSTANTS["global_scale"],
+        STRUCT["sun_to_moon"]["2_r"],
         STRUCT["sun_to_moon"]["theta"],
-        GT,
+        LAYER_THICKNESS,
     )
     translate(
         parts["shafts"]["lunar_phases_shaft"],
-        STRUCT["sun_to_lunar_phases"]["5_r"] * CONSTANTS["global_scale"],
+        STRUCT["sun_to_lunar_phases"]["5_r"],
         STRUCT["sun_to_lunar_phases"]["theta"],
-        (STRUCT["sun_to_lunar_phases"]["offset"] + 3) * GT,
+        (STRUCT["sun_to_lunar_phases"]["offset"] + 3) * LAYER_THICKNESS,
     )
     translate(
         parts["shafts"]["clock_internal_shaft"],
-        STRUCT["clock_to_sun"]["4_r"] * CONSTANTS["global_scale"],
+        STRUCT["clock_to_sun"]["4_r"],
         STRUCT["clock_to_sun"]["theta"] + STRUCT["clock_to_sun"]["4_theta"],
-        (STRUCT["clock_to_sun"]["offset"]) * GT,
+        (STRUCT["clock_to_sun"]["offset"]) * LAYER_THICKNESS,
     )
 
 
@@ -234,9 +244,9 @@ def position_gears(parts):
                 gear_idx = m[1]
                 translate(
                     part,
-                    s[f"{gear_idx}_r"] * CONSTANTS["global_scale"],
+                    s[f"{gear_idx}_r"],
                     s["theta"] + s.get(f"{gear_idx}_theta", 0),
-                    (s["offset"] + s.get(f"{gear_idx}_offset", 0)) * GT,
+                    (s["offset"] + s.get(f"{gear_idx}_offset", 0)) * LAYER_THICKNESS,
                     mirror=s.get(f"{gear_idx}_mirror", False),
                 )
 
@@ -244,7 +254,10 @@ def position_gears(parts):
 def position_structure_carrier(parts, carrier_idx):
     if f"c{carrier_idx}_carrier" in parts:
         translate(
-            parts[f"c{carrier_idx}_carrier"], 0, 0, OFFSET_CARRIER[carrier_idx] * GT
+            parts[f"c{carrier_idx}_carrier"],
+            0,
+            0,
+            OFFSET_CARRIER[carrier_idx] * LAYER_THICKNESS,
         )
 
     if f"c{carrier_idx}_carrier_1" in parts:
@@ -253,7 +266,7 @@ def position_structure_carrier(parts, carrier_idx):
             parts[f"c{carrier_idx}_carrier_1"],
             0,
             0,
-            (OFFSET_CARRIER[carrier_idx] + 1 / 2) * GT,
+            (OFFSET_CARRIER[carrier_idx] + 1 / 2) * LAYER_THICKNESS,
             mirror=True,
         )
 
@@ -262,14 +275,24 @@ def position_structure_carrier(parts, carrier_idx):
             parts[f"c{carrier_idx}_carrier_2"],
             0,
             0,
-            (OFFSET_CARRIER[carrier_idx] + 1 / 2) * GT,
+            (OFFSET_CARRIER[carrier_idx] + 1 / 2) * LAYER_THICKNESS,
         )
 
 
 def position_structure_carrier_components(parts, carrier_idx):
-    translate(parts[f"c{carrier_idx}_carrier"], 0, 0, OFFSET_CARRIER[carrier_idx] * GT)
+    translate(
+        parts[f"c{carrier_idx}_carrier"],
+        0,
+        0,
+        OFFSET_CARRIER[carrier_idx] * LAYER_THICKNESS,
+    )
     rotate(parts[f"c{carrier_idx}_hub"], 3 / 10 * pi)
-    translate(parts[f"c{carrier_idx}_hub"], 0, 0, OFFSET_CARRIER[carrier_idx] * GT)
+    translate(
+        parts[f"c{carrier_idx}_hub"],
+        0,
+        0,
+        OFFSET_CARRIER[carrier_idx] * LAYER_THICKNESS,
+    )
     sectors = {
         "clock_to_sun": CLOCK_TO_SUN_STRUCT,
         "sun_to_moon": SUN_TO_MOON_STRUCT,
@@ -285,12 +308,14 @@ def position_structure_carrier_components(parts, carrier_idx):
                 parts[sector_name],
                 0,
                 0,
-                GT,
+                LAYER_THICKNESS,
                 mirror=True,
             )
             rotate(parts[sector_name], pi)
         rotate(parts[sector_name], sector["theta"])
-        translate(parts[sector_name], 0, 0, OFFSET_CARRIER[carrier_idx] * GT)
+        translate(
+            parts[sector_name], 0, 0, OFFSET_CARRIER[carrier_idx] * LAYER_THICKNESS
+        )
 
 
 def position_structure(parts):
@@ -300,7 +325,7 @@ def position_structure(parts):
 
 def position_tympan(parts):
     for part in parts.values():
-        translate(part, 0, 0, OFFSET_TYMPAN * GT)
+        translate(part, 0, 0, OFFSET_TYMPAN * LAYER_THICKNESS)
         bpy.data.objects.remove(part)
 
 

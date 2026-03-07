@@ -6,7 +6,7 @@ include <../../utils/constants/moon_to_zodiac/env.scad>
 n = moon_to_zodiac_1_n;
 m = moon_to_zodiac_mod;
 
-scale([global_scale, global_scale, 1])
+scale([global_scale, global_scale, global_scale])
   difference() {
     default_gear(n, m);
     hex_hole(apothem = moon_shaft_radius);

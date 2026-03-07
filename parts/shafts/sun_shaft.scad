@@ -4,7 +4,7 @@ include <../../utils/constants/clock_to_sun/env.scad>
 
 shaft_length = (carrier_3_offset - carrier_2_offset + 2 + 5 + 1);
 
-scale([global_scale, global_scale, 1])
+scale([global_scale, global_scale, global_scale])
   difference() {
     union() {
       circular_shaft(radius = sun_shaft_radius_lunar_nodes, length = shaft_length);

@@ -6,7 +6,7 @@ include <../../utils/constants/sun_to_lunar_nodes/env.scad>
 n = sun_to_lunar_nodes_1_n;
 m = sun_to_lunar_nodes_1_2a_mod;
 
-scale([global_scale, global_scale, 1])
+scale([global_scale, global_scale, global_scale])
   difference() {
     default_gear(n, m);
     hex_hole(circumradius = sun_shaft_radius - 2);

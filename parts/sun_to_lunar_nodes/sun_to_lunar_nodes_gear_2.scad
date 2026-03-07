@@ -8,7 +8,7 @@ nb = sun_to_lunar_nodes_2b_n;
 ma = sun_to_lunar_nodes_1_2a_mod;
 mb = sun_to_lunar_nodes_2b_3_mod;
 
-scale([global_scale, global_scale, 1])
+scale([global_scale, global_scale, global_scale])
   difference() {
     union() {
       default_gear(na, ma, invert = true);

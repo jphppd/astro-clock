@@ -13,7 +13,7 @@ use <c3_sector_clock_to_sun.module.scad>
 use <c3_sector_sun_to_lunar_nodes.module.scad>
 use <c3_sector_sun_to_lunar_phases.module.scad>
 
-scale([global_scale, global_scale, 1])
+scale([global_scale, global_scale, global_scale])
   difference() {
     union() {
       base_structure_complete(sun_shaft_radius_c3_hub);
@@ -40,7 +40,7 @@ scale([global_scale, global_scale, 1])
     rotate(sun_to_lunar_phases_theta)
       sun_to_lunar_phases_drill();
 
-    for(theta=[-90-13,-90+13])
-    rotate(theta)
-      circular_hole(r = carrier_outer_radius, theta = 0);
+    for(theta = [-90 - 13, -90 + 13])
+      rotate(theta)
+        circular_hole(r = carrier_outer_radius, theta = 0);
   }

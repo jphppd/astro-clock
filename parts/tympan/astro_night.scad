@@ -5,7 +5,7 @@ include <../../utils/constants/structure.scad>
 include <../../utils/constants/sun_to_lunar_nodes/env.scad>
 include <../../utils/constants/sun_to_lunar_phases/structure.scad>
 
-scale([global_scale, global_scale, 1])
+scale([global_scale, global_scale, global_scale])
   difference() {
     linear_extrude(height = layer_thickness)
       offset(delta = -half_allowance)

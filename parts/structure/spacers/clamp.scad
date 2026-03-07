@@ -1,7 +1,5 @@
-include <../../../utils/machining.scad>
-include <../../../utils/structure.scad>
 include <../../../utils/constants/constants.scad>
-include <../../../utils/constants/structure.scad>
 include <clamp.module.scad>
 
-clamp();
+scale([global_scale, global_scale, global_scale])
+  clamp();

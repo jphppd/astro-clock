@@ -6,7 +6,7 @@ include <../../utils/constants/sun_to_lunar_phases/env.scad>
 n = sun_to_lunar_phases_7_n;
 m = sun_to_lunar_phases_6_7_mod;
 
-scale([global_scale, global_scale, 1])
+scale([global_scale, global_scale, global_scale])
   difference() {
     translate([0, 0, sun_to_lunar_phases_bevel_offset])
       default_gear(n, m, bevel_cone_angle = 45);

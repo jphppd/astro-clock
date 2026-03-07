@@ -4,7 +4,7 @@ include <../../utils/constants/sun_to_moon/env.scad>
 
 shaft_length = 4;
 
-scale([global_scale, global_scale, 1])
+scale([global_scale, global_scale, global_scale])
   difference() {
     union() {
       translate([0, 0, (shaft_length - 1) * layer_thickness])

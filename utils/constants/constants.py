@@ -1,13 +1,15 @@
 import math
 
+_global_scale = 0.75
+
 DATA = {
     "$fs": 0.1,
     "$fn": 64,
     "eps": 0.001,
-    "global_scale": 0.75,
-    "half_allowance_absolute": 0.12,
+    "global_scale": _global_scale,
+    "half_allowance": 0.12 / _global_scale,
     "spacer_sleeve": 3,
-    "layer_thickness": 4,
+    "layer_thickness": 4 / _global_scale,
     "carrier_1_width": 7,
     "carrier_2_width": 7,
     "ecliptic_inclination": 23.44,
@@ -16,16 +18,11 @@ DATA = {
     "lunar_phases_shaft_radius": 6.0,
     "clock_shaft_radius": 7.1 / 2,
     "obs_latitude": 47.7343,
-    "motor_shaft_diameter": 3.1,
+    "motor_shaft_diameter": 3.1 / _global_scale,
 }
 
-DATA.update(
-    {
-        "half_allowance": DATA["half_allowance_absolute"] / DATA["global_scale"],
-        "gear_thickness": DATA["layer_thickness"]
-        - 2 * DATA["half_allowance_absolute"] / DATA["global_scale"],
-    }
-)
+DATA["gear_thickness"] = DATA["layer_thickness"] - DATA["half_allowance"]
+
 
 # Shafts
 # [moon : zodiac : sun_shaft_radius_lunar_nodes : lunar_nodes]

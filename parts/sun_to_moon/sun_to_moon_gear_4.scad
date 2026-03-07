@@ -7,7 +7,7 @@ n = sun_to_moon_4_n;
 m = sun_to_moon_3_4_mod;
 r_dedendum = fn_r_dedendum(n, m);
 
-scale([global_scale, global_scale, 1])
+scale([global_scale, global_scale, global_scale])
   difference() {
     default_gear(n, m);
     hex_hole(apothem = moon_shaft_radius);

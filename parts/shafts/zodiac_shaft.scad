@@ -4,7 +4,7 @@ include <../../utils/constants/moon_to_zodiac/env.scad>
 
 shaft_length = (carrier_3_offset - carrier_2_offset + 3 + 5 + 2);
 
-scale([global_scale, global_scale, 1])
+scale([global_scale, global_scale, global_scale])
   difference() {
     union() {
       circular_shaft(radius = zodiac_shaft_radius, length = shaft_length);

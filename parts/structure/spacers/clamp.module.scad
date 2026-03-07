@@ -39,15 +39,14 @@ module centering_claw(z, thickness)translate([0, 0, (z - thickness / 2) * layer_
     }
 
 
-module clamp()scale([global_scale, global_scale, 1])
-  translate([-carrier_outer_radius, 0, 0]) {
-    linear_extrude(clamp_height * layer_thickness)
-      arc(arc_half_angle_claw, outer_radius, outer_radius + clamp_width);
-    claw();
-    translate([0, 0, clamp_height * layer_thickness])
-      rotate([180, 0, 0])
-        claw();
+module clamp()translate([-carrier_outer_radius, 0, 0]) {
+  linear_extrude(clamp_height * layer_thickness)
+    arc(arc_half_angle_claw, outer_radius, outer_radius + clamp_width);
+  claw();
+  translate([0, 0, clamp_height * layer_thickness])
+    rotate([180, 0, 0])
+      claw();
 
-    centering_claw((carrier_2_offset + carrier_1_offset + 1) / 2, (carrier_2_offset - carrier_1_offset) / 3);
-    centering_claw((carrier_3_offset + carrier_2_offset + 1) / 2, (carrier_2_offset - carrier_1_offset) / 3);
-  }
+  centering_claw((carrier_2_offset + carrier_1_offset + 1) / 2, (carrier_2_offset - carrier_1_offset) / 3);
+  centering_claw((carrier_3_offset + carrier_2_offset + 1) / 2, (carrier_2_offset - carrier_1_offset) / 3);
+}

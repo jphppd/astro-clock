@@ -6,7 +6,7 @@ include <../../utils/constants/sun_to_moon/env.scad>
 n = sun_to_moon_2_n;
 m = sun_to_moon_1_2_mod;
 
-scale([global_scale, global_scale, 1])
+scale([global_scale, global_scale, global_scale])
   difference() {
     default_gear(n, m, invert = true);
     hex_hole(apothem = gears_shaft_radius + spacer_sleeve);

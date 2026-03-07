@@ -25,7 +25,7 @@ module sun_to_lunar_phases_drill() {
   circular_hole(r = carrier_outer_radius, theta = 0);
 }
 
-scale([global_scale, global_scale, 1])
+scale([global_scale, global_scale, global_scale])
   difference() {
     union() {
       base_structure();

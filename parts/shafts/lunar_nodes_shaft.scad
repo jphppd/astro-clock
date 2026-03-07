@@ -4,7 +4,7 @@ include <../../utils/constants/sun_to_lunar_nodes/env.scad>
 
 shaft_length = (2 + 5);
 
-scale([global_scale, global_scale, 1])
+scale([global_scale, global_scale, global_scale])
   difference() {
     union() {
       circular_shaft(radius = lunar_nodes_shaft_radius, length = shaft_length);

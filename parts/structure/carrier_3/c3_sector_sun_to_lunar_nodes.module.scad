@@ -13,11 +13,10 @@ module sun_to_lunar_nodes_drill() {
   circular_hole(r = sun_to_lunar_nodes_2_r, theta = 0, length = carrier_3_offset - carrier_3_offset + 1);
 }
 
-scale([global_scale, global_scale, 1])
-  difference() {
-    union() {
-      base_structure();
-      sun_to_lunar_nodes();
-    }
-    sun_to_lunar_nodes_drill();
+difference() {
+  union() {
+    base_structure();
+    sun_to_lunar_nodes();
   }
+  sun_to_lunar_nodes_drill();
+}

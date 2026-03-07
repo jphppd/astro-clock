@@ -18,11 +18,10 @@ module clock_to_sun_drill() {
   circular_hole(r = carrier_outer_radius, theta = 0);
 }
 
-scale([global_scale, global_scale, 1])
-  difference() {
-    union() {
-      base_structure();
-      clock_to_sun();
-    }
-    clock_to_sun_drill();
+difference() {
+  union() {
+    base_structure();
+    clock_to_sun();
   }
+  clock_to_sun_drill();
+}

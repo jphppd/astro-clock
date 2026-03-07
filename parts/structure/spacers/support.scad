@@ -15,20 +15,19 @@ module arc_support()let(r1 = carrier_outer_radius + outer_annulus_sagitta / 2, r
           [r2, r2 * tan(theta)]
       ]));
 
-difference() {
-  union() {
-    for(theta = [-90 - 13, -90 + 13])
-      rotate(theta)
-        translate([carrier_outer_radius * global_scale, 0, 0])
-          clamp();
+scale([global_scale, global_scale, global_scale])
+  difference() {
+    union() {
+      for(theta = [-90 - 13, -90 + 13])
+        rotate(theta)
+          translate([carrier_outer_radius, 0, 0])
+            clamp();
 
-
-    for(tz = [0, carrier_2_offset - carrier_1_offset, carrier_3_offset - carrier_1_offset])
-      translate([0, 0, tz * layer_thickness])
-        scale([global_scale, global_scale, 1])
+      for(tz = [0, carrier_2_offset - carrier_1_offset, carrier_3_offset - carrier_1_offset])
+        translate([0, 0, tz * layer_thickness])
           arc_support();
-  }
+    }
 
-  translate([0, -(carrier_outer_radius + outer_annulus_sagitta / 2) * global_scale, 0])
-    cube([3.5, 3.4, 3 * layer_thickness], center = true);
-}
+    translate([0, -(carrier_outer_radius + outer_annulus_sagitta / 2), 0])
+      cube([3.5, 3.4, 3 * layer_thickness], center = true);
+  }

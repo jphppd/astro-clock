@@ -3,31 +3,31 @@ include <../../utils/constants/constants.scad>
 include <../../utils/constants/structure.scad>
 
 // Motor case
-wall_width = 2.5;
-motor_height = 21;
-motor_outer_diameter_top = 50;
-motor_outer_diameter_bottom = 49.6;
-motor_case_bottom_height = 7 * layer_thickness - motor_height;
-screwhole_radius = 4.45 / 2;
-cables_hole_center = motor_outer_diameter_bottom / 2 - 4.5;
+wall_width = 2.5 / global_scale;
+motor_height = 21 / global_scale;
+motor_outer_diameter_top = 50 / global_scale;
+motor_outer_diameter_bottom = 49.6 / global_scale;
+motor_case_bottom_height = (7 * layer_thickness - motor_height);
+screwhole_radius = 4.45 / 2 / global_scale;
+cables_hole_center = motor_outer_diameter_bottom / 2 - 4.5 / global_scale;
 
 // Shaft
-shaft_base_radius = 6.3;
-shaft_base_height = 4.8;
-shaft_position = 13;
+shaft_base_radius = 6.3 / global_scale;
+shaft_base_height = 4.8 / global_scale;
+shaft_position = 13 / global_scale;
 
 // Screw plate
-screw_plate_height = 1.4;
-screw_plate_overhead = 6 - screwhole_radius;
-screw_plate_width = 14.4;
-screw_plate_hole_radius = 28.4;
-screw_plate_hole_radius_delta = 0.1;
-screw_plate_hole_theta = 83.3;
-screw_plate_hole_theta_delta = 13.5647 / 2;
+screw_plate_height = 1.4 / global_scale;
+screw_plate_overhead = (6 - screwhole_radius) / global_scale;
+screw_plate_width = 14.4 / global_scale;
+screw_plate_hole_radius = 28.4 / global_scale;
+screw_plate_hole_radius_delta = 0.1 / global_scale;
+screw_plate_hole_theta = 83.3 / global_scale;
+screw_plate_hole_theta_delta = 13.5647 / 2 / global_scale;
 
 // Plugs and switch
-plug_switch_height = 21;
-plug_switch_length = 36.5;
+plug_switch_height = 21 / global_scale;
+plug_switch_length = 36.5 / global_scale;
 
 // Computed elements
 screw_plate_hole_radius_1 = screw_plate_hole_radius + screw_plate_hole_radius_delta;
@@ -116,8 +116,6 @@ module bottom(wall_width)translate([0, 0, -motor_height - motor_case_bottom_heig
   linear_extrude(motor_case_bottom_height)
     difference() {
       circle(r = motor_outer_diameter_top / 2 + wall_width);
-
-
       union() {
         plug_hole();
         translate([cables_hole_center, 0, 0])
@@ -146,7 +144,6 @@ module main_cap(wall_width)linear_extrude(layer_thickness)
         circle(r = shaft_base_radius);
     }
 
-
 module cap_holder(width, height, tolerance)mirror([0, 0, 1])
   translate([0, shaft_position, 0])
     rotate(90)
@@ -168,4 +165,3 @@ module case_holder(wall_width, height)translate([0, shaft_position, 0])
 module motor_support()linear_extrude(layer_thickness)
   translate([0, -clock_to_sun_1_r - 21])
     square([spoke_width, 10], center = true);
-

@@ -7,7 +7,7 @@ na = moon_to_zodiac_4a_n;
 nb = moon_to_zodiac_4b_n;
 m = moon_to_zodiac_mod;
 
-scale([global_scale, global_scale, 1])
+scale([global_scale, global_scale, global_scale])
   difference() {
     union() {
       default_gear(na, m, invert = true);

@@ -15,11 +15,10 @@ module sun_to_moon() {
 module sun_to_moon_drill() {
 }
 
-scale([global_scale, global_scale, 1])
-  difference() {
-    union() {
-      base_structure();
-      sun_to_moon();
-    }
-    sun_to_moon_drill();
+difference() {
+  union() {
+    base_structure();
+    sun_to_moon();
   }
+  sun_to_moon_drill();
+}

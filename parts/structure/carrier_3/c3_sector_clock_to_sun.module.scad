@@ -28,13 +28,12 @@ module clock_to_sun_drill() {
   circular_hole(r = carrier_outer_radius, theta = 0);
 }
 
-scale([global_scale, global_scale, 1])
-  translate([0, 0, layer_thickness])
-    rotate(180, [1, 0, 0])
-      difference() {
-        union() {
-          base_structure();
-          clock_to_sun();
-        }
-        clock_to_sun_drill();
+translate([0, 0, layer_thickness])
+  rotate(180, [1, 0, 0])
+    difference() {
+      union() {
+        base_structure();
+        clock_to_sun();
       }
+      clock_to_sun_drill();
+    }

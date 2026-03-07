@@ -8,7 +8,7 @@ nb = clock_to_sun_2b_n;
 ma = clock_to_sun_1_2a_mod;
 mb = clock_to_sun_2b_3a_mod;
 
-scale([global_scale, global_scale, 1])
+scale([global_scale, global_scale, global_scale])
   difference() {
     union() {
       default_gear(na, ma, invert = true);
@@ -17,12 +17,12 @@ scale([global_scale, global_scale, 1])
     }
     circular_hole(radius = gears_shaft_radius, length = 2);
 
-    for(theta = [360/24:360 / 12:360])
+    for(theta = [360 / 24:360 / 12:360])
       circular_hole(r = 3 / 4 * na * ma / 2, theta = theta, radius = 1 / 20 * na * ma);
 
     for(theta = [0:360 / 12:360])
-      circular_hole(r = 5/9 * na * ma / 2, theta = theta, radius = 1 / 30 * na * ma);
+      circular_hole(r = 5 / 9 * na * ma / 2, theta = theta, radius = 1 / 30 * na * ma);
 
     for(theta = [0:360 / 8:360])
-      circular_hole(r = 3/5 * nb * mb / 2, theta = theta, radius = 1 / 40 * na * ma, length = 2);
+      circular_hole(r = 3 / 5 * nb * mb / 2, theta = theta, radius = 1 / 40 * na * ma, length = 2);
   }

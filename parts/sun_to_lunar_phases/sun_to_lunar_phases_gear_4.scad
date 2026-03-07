@@ -8,7 +8,7 @@ nb = sun_to_lunar_phases_4b_n;
 ma = sun_to_lunar_phases_3b_4a_mod;
 mb = sun_to_lunar_phases_4b_5_mod;
 
-scale([global_scale, global_scale, 1])
+scale([global_scale, global_scale, global_scale])
   difference() {
     union() {
       default_gear(na, ma, invert = true);

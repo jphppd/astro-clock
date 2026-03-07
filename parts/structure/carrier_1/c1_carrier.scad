@@ -28,13 +28,12 @@ module carrier_without_motor()difference() {
     rotate(sun_to_lunar_phases_theta)
       sun_to_lunar_phases();
 
-
-    for(theta=[-90-13,-90+13])
-    rotate(theta) {
-      circular_shaft(r = carrier_outer_radius, theta = 0, length = carrier_3_offset + 1);
-      translate([carrier_outer_radius, 0, layer_thickness])
-        fillet(gears_shaft_radius - half_allowance, gears_shaft_radius + 3);
-    }
+    for(theta = [-90 - 13, -90 + 13])
+      rotate(theta) {
+        circular_shaft(r = carrier_outer_radius, theta = 0, length = carrier_3_offset + 1);
+        translate([carrier_outer_radius, 0, layer_thickness])
+          fillet(gears_shaft_radius - half_allowance, gears_shaft_radius + 3);
+      }
   }
 
   rotate(moon_to_zodiac_theta)
@@ -49,22 +48,20 @@ module carrier_without_motor()difference() {
     sun_to_lunar_phases_drill();
 }
 
-
 module carrier()difference() {
   union() {
-    scale([global_scale, global_scale, 1])
-      carrier_without_motor();
-
-    translate([0, -clock_to_sun_1_r * global_scale, 0])
+    carrier_without_motor();
+    translate([0, -clock_to_sun_1_r, 0])
       translate([0, 0, 7 * layer_thickness])
         rotate(90)
-          main_case(wall_width);    
+          main_case(wall_width);
   }
 
   translate([0, -eps, 0])
     linear_extrude(1.7 + eps)
-      translate([0, -clock_to_sun_1_r * global_scale - 21])
+      translate([0, -clock_to_sun_1_r - 21])
         square([3.5, 40], center = true);
 }
 
-carrier();
+scale([global_scale, global_scale, global_scale])
+  carrier();

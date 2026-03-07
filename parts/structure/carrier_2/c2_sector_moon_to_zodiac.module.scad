@@ -26,13 +26,12 @@ module moon_to_zodiac_drill() {
   circular_hole(r = carrier_outer_radius, theta = 0);
 }
 
-scale([global_scale, global_scale, 1])
-  translate([0, 0, layer_thickness])
-    rotate(180, [1, 0, 0])
-      difference() {
-        union() {
-          base_structure();
-          moon_to_zodiac();
-        }
-        moon_to_zodiac_drill();
+translate([0, 0, layer_thickness])
+  rotate(180, [1, 0, 0])
+    difference() {
+      union() {
+        base_structure();
+        moon_to_zodiac();
       }
+      moon_to_zodiac_drill();
+    }

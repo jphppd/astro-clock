@@ -12,11 +12,10 @@ module sun_to_lunar_nodes() {
 module sun_to_lunar_nodes_drill() {
 }
 
-scale([global_scale, global_scale, 1])
-  difference() {
-    union() {
-      base_structure();
-      sun_to_lunar_nodes();
-    }
-    sun_to_lunar_nodes_drill();
+difference() {
+  union() {
+    base_structure();
+    sun_to_lunar_nodes();
   }
+  sun_to_lunar_nodes_drill();
+}

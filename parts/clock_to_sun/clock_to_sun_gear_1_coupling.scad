@@ -1,3 +1,5 @@
+include <../../utils/constants/constants.scad>
 use <clock_to_sun_gear_1.module.scad>
 
-shaft_to_gear_coupling();
+scale([global_scale, global_scale, global_scale])
+  shaft_to_gear_coupling();
