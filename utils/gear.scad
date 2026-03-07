@@ -543,7 +543,7 @@ function fold_on_sphere(points, r_pitch, cone_half_angle) = //
           [ //
           r_sin_theta_over_rho * pt.x, //
           r_sin_theta_over_rho * pt.y, //
-          r_sphere * cos(theta) + h + pt.z]
+          pt.z == 0 ? 0 : r_sphere * cos(theta) + h + pt.z]
     ];
 
 _subded_factor = 0.95;

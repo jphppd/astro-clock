@@ -102,5 +102,6 @@ DATA = {
     "7_theta": 0,
     "dist_25": rBC,
     "dist_36": rAB,
+    "dist_67": rOA,
     "gears": env.DATA,
 }

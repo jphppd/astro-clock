@@ -31,8 +31,8 @@ OFFSET_SUN_TO_MOON = 1
 OFFSET_MOON_TO_ZODIAC = OFFSET_SUN_TO_MOON + 1
 OFFSET_CARRIER["2"] = OFFSET_MOON_TO_ZODIAC + 5
 OFFSET_CLOCK_TO_SUN = OFFSET_CARRIER["2"] + 1
-OFFSET_SUN_TO_LUNAR_PHASES = OFFSET_CLOCK_TO_SUN + 1
-OFFSET_SUN_TO_LUNAR_NODES = OFFSET_SUN_TO_LUNAR_PHASES + 3
+OFFSET_SUN_TO_LUNAR_PHASES = OFFSET_CLOCK_TO_SUN
+OFFSET_SUN_TO_LUNAR_NODES = OFFSET_SUN_TO_LUNAR_PHASES + 4
 OFFSET_CARRIER["3"] = OFFSET_SUN_TO_LUNAR_NODES + 2
 OFFSET_TYMPAN = OFFSET_CARRIER["3"] + 1
 
@@ -160,12 +160,25 @@ def translate(part, radius: float, rotation: float, depth: float, mirror=False):
     part.select_set(False)
 
 
-def rotate(part, rotation: float):
+def translate_xyz(part, x: float, y: float, z: float):
+    bpy.ops.object.select_all(action="DESELECT")
+    part.select_set(True)
+    bpy.ops.transform.translate(
+        value=[
+            SCALE * z * CONSTANTS["global_scale"],
+            SCALE * x * CONSTANTS["global_scale"],
+            SCALE * y * CONSTANTS["global_scale"],
+        ]
+    )
+    part.select_set(False)
+
+
+def rotate(part, rotation: float, orient_axis="X"):
     bpy.ops.object.select_all(action="DESELECT")
     part.select_set(True)
     bpy.ops.transform.rotate(
         value=-rotation,
-        orient_axis="X",
+        orient_axis=orient_axis,
     )
     part.select_set(False)
 
@@ -217,16 +230,27 @@ def position_shafts(parts):
         LAYER_THICKNESS,
     )
     translate(
-        parts["shafts"]["lunar_phases_shaft"],
-        STRUCT["sun_to_lunar_phases"]["5_r"],
-        STRUCT["sun_to_lunar_phases"]["theta"],
-        (STRUCT["sun_to_lunar_phases"]["offset"] + 3) * LAYER_THICKNESS,
-    )
-    translate(
         parts["shafts"]["clock_internal_shaft"],
         STRUCT["clock_to_sun"]["4_r"],
         STRUCT["clock_to_sun"]["theta"] + STRUCT["clock_to_sun"]["4_theta"],
-        (STRUCT["clock_to_sun"]["offset"]) * LAYER_THICKNESS,
+        STRUCT["clock_to_sun"]["offset"] * LAYER_THICKNESS,
+    )
+    translate(
+        parts["shafts"]["lunar_phases_shaft"],
+        STRUCT["sun_to_lunar_phases"]["5_r"],
+        STRUCT["sun_to_lunar_phases"]["theta"],
+        STRUCT["sun_to_lunar_phases"]["offset"] * LAYER_THICKNESS,
+    )
+    lunar_phases_shaft = parts["shafts"]["lunar_phases_shaft"]
+    rotate(lunar_phases_shaft, -pi / 2, "Y")
+    translate_xyz(lunar_phases_shaft, 0, 0, CONSTANTS["gear_thickness"])
+    translate_xyz(
+        lunar_phases_shaft,
+        0,
+        (SUN_TO_LUNAR_PHASES_STRUCT["gears"]["6_n"] / 2 + 1)
+        * SUN_TO_LUNAR_PHASES_STRUCT["gears"]["5b_6_mod"],
+        (SUN_TO_LUNAR_PHASES_STRUCT["gears"]["6_n"] / 2 + 1)
+        * SUN_TO_LUNAR_PHASES_STRUCT["gears"]["5b_6_mod"],
     )
 
 
@@ -240,7 +264,7 @@ def position_gears(parts):
     ]:
         s = STRUCT[c]
         for part in parts[c].values():
-            if m := re.match(f"{c}_gear_(\d[a-z]?)", part.name):  # type: ignore
+            if m := re.match(f"{c}_gear_(\d+[a-z]?)", part.name):  # type: ignore
                 gear_idx = m[1]
                 translate(
                     part,
@@ -249,6 +273,21 @@ def position_gears(parts):
                     (s["offset"] + s.get(f"{gear_idx}_offset", 0)) * LAYER_THICKNESS,
                     mirror=s.get(f"{gear_idx}_mirror", False),
                 )
+
+    sun_to_lunar_phases_gear_6 = parts["sun_to_lunar_phases"][
+        "sun_to_lunar_phases_gear_6"
+    ]
+    rotate(sun_to_lunar_phases_gear_6, pi / 2, "X")
+    rotate(sun_to_lunar_phases_gear_6, pi / 2, "Y")
+    translate_xyz(sun_to_lunar_phases_gear_6, 0, 0, CONSTANTS["gear_thickness"])
+    translate_xyz(
+        sun_to_lunar_phases_gear_6,
+        0,
+        (SUN_TO_LUNAR_PHASES_STRUCT["gears"]["6_n"] / 2 + 1)
+        * SUN_TO_LUNAR_PHASES_STRUCT["gears"]["5b_6_mod"],
+        (SUN_TO_LUNAR_PHASES_STRUCT["gears"]["6_n"] / 2 + 1)
+        * SUN_TO_LUNAR_PHASES_STRUCT["gears"]["5b_6_mod"],
+    )
 
 
 def position_structure_carrier(parts, carrier_idx):

@@ -19,4 +19,10 @@ scale([global_scale, global_scale, global_scale])
 
     for(theta = [0:360 / 12:360])
       circular_hole(r = 2 / 3 * na * ma / 2, theta = theta, radius = 1 / 20 * na * ma);
+
+    for(theta = [360 / 24:360 / 12:360])
+      circular_hole(r = 4 / 5 * na * ma / 2, theta = theta, radius = 1 / 32 * na * ma);
+
+    for(theta = [360 / 24:360 / 8:360])
+      circular_hole(r = 3 / 5 * nb * mb / 2, theta = theta, radius = 1 / 16 * nb * mb, length = 2);
   }
