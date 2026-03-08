@@ -48,10 +48,6 @@ module sun_to_lunar_phases_drill() {
               cylinder(r = lunar_phases_shaft_radius * 2 / 3 + half_allowance / 2, h = depth + eps);
         }
     }
-
-  for(theta = [-13, 13])
-    rotate(theta)
-      circular_hole(r = carrier_outer_radius, theta = 0);
 }
 
 difference() {

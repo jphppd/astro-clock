@@ -14,6 +14,8 @@ use <c2_sector_sun_to_lunar_nodes.module.scad>
 use <c2_sector_sun_to_lunar_phases.module.scad>
 include <../../motor/motor.module.scad>
 
+clamp_angle = 360 / 10 + clock_to_sun_2_theta;
+
 module carrier_without_motor() {
   difference() {
     union() {
@@ -41,7 +43,7 @@ module carrier_without_motor() {
     rotate(sun_to_lunar_phases_theta)
       sun_to_lunar_phases_drill();
 
-    for(theta = [-90 - 13, -90 + 13])
+    for(theta = [-90 - clamp_angle, -90 + clamp_angle, 90 - clamp_angle, 90 + clamp_angle])
       rotate(theta)
         circular_hole(r = carrier_outer_radius, theta = 0);
   }

@@ -14,6 +14,8 @@ use <c1_sector_sun_to_lunar_nodes.module.scad>
 use <c1_sector_sun_to_lunar_phases.module.scad>
 include <../../motor/motor.module.scad>
 
+clamp_angle = 360 / 10 + clock_to_sun_2_theta;
+
 module carrier_without_motor()difference() {
   union() {
     base_structure_complete(moon_shaft_radius);
@@ -28,7 +30,7 @@ module carrier_without_motor()difference() {
     rotate(sun_to_lunar_phases_theta)
       sun_to_lunar_phases();
 
-    for(theta = [-90 - 13, -90 + 13])
+    for(theta = [-90 - clamp_angle, -90 + clamp_angle, 90 - clamp_angle, 90 + clamp_angle])
       rotate(theta) {
         circular_shaft(r = carrier_outer_radius, theta = 0, length = carrier_3_offset + 1);
         translate([carrier_outer_radius, 0, layer_thickness])
@@ -60,7 +62,7 @@ module carrier()difference() {
   translate([0, -eps, 0])
     linear_extrude(1.7 + eps)
       translate([0, -clock_to_sun_1_r - 21])
-        square([3.5, 40], center = true);
+        square([3.5 / global_scale, 40], center = true);
 }
 
 scale([global_scale, global_scale, global_scale])
