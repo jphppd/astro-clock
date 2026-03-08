@@ -55,7 +55,6 @@ COLORS = {
     "sun_to_moon": (0, 153, 0),
     "moon_to_zodiac": (255, 0, 0),
     "clock_to_sun": (255, 255, 0),
-    "clock_internal_shaft": (255, 255, 0),
     "sun_to_lunar_phases": (204, 51, 255),
     "sun_to_lunar_nodes": (0, 51, 204),
     "structure": (235, 228, 155),
@@ -65,7 +64,6 @@ COLORS = {
     "carrier_2": (255, 184, 51),
     "carrier_3": (255, 184, 51),
     "moon_shaft": (0, 153, 0),
-    "moon_internal_shaft": (0, 153, 0),
     "zodiac_shaft": (255, 0, 0),
     "lunar_phases_shaft": (204, 51, 255),
     "lunar_nodes_shaft": (0, 51, 204),
@@ -222,18 +220,6 @@ def position_shafts(parts):
         0,
         0,
         (STRUCT["clock_to_sun"]["offset"] - 2) * LAYER_THICKNESS,
-    )
-    translate(
-        parts["shafts"]["moon_internal_shaft"],
-        STRUCT["sun_to_moon"]["2_r"],
-        STRUCT["sun_to_moon"]["theta"],
-        LAYER_THICKNESS,
-    )
-    translate(
-        parts["shafts"]["clock_internal_shaft"],
-        STRUCT["clock_to_sun"]["4_r"],
-        STRUCT["clock_to_sun"]["theta"] + STRUCT["clock_to_sun"]["4_theta"],
-        STRUCT["clock_to_sun"]["offset"] * LAYER_THICKNESS,
     )
     translate(
         parts["shafts"]["lunar_phases_shaft"],

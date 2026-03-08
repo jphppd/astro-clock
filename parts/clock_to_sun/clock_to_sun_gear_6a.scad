@@ -9,7 +9,7 @@ m = clock_to_sun_5b_6a_mod;
 scale([global_scale, global_scale, global_scale])
   difference() {
     default_gear(n, m);
-    hex_hole(apothem = gears_shaft_radius + spacer_sleeve + 1);
+    hex_hole(circumradius = gears_shaft_radius + spacer_sleeve - 0.5);
 
     rotate(360 / 12)
       for(theta = [0:360 / 6:360])

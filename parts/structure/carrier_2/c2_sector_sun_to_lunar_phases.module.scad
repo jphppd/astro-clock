@@ -20,7 +20,7 @@ module sun_to_lunar_phases() {
 }
 
 module sun_to_lunar_phases_drill() {
-  for(theta = [-20, 20])
+  for(theta = [-13, 13])
     rotate(theta)
       circular_hole(r = carrier_outer_radius, theta = 0);
 

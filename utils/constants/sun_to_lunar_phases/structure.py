@@ -18,7 +18,12 @@ d12 = (env.DATA["1_n"] + env.DATA["2a_n"]) * env.DATA["1_2a_mod"] / 2
 d23 = (env.DATA["2b_n"] + env.DATA["3a_n"]) * env.DATA["2b_3a_mod"] / 2
 d34 = (env.DATA["3b_n"] + env.DATA["4a_n"]) * env.DATA["3b_4a_mod"] / 2
 d45 = (env.DATA["4b_n"] + env.DATA["5a_n"]) * env.DATA["4b_5a_mod"] / 2
-d15 = STRUCT_DATA["carrier_outer_radius"] + STRUCT_DATA["annulus_sagitta"] - env.DATA["4b_5a_mod"] * env.DATA["5a_n"]/2 - 1.5
+d15 = (
+    STRUCT_DATA["carrier_outer_radius"]
+    + STRUCT_DATA["annulus_sagitta"]
+    - env.DATA["4b_5a_mod"] * env.DATA["5a_n"] / 2
+    - 1.5
+)
 
 #    5
 #      4

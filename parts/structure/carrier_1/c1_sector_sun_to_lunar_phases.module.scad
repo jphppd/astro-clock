@@ -4,7 +4,7 @@ include <../../../utils/constants/constants.scad>
 include <../../../utils/constants/structure.scad>
 
 module sun_to_lunar_phases() {
-  for(theta = [-20, 20])
+  for (theta = [-13, 13])
     rotate(theta) {
       circular_shaft(r = carrier_outer_radius, theta = 0, length = carrier_3_offset + 1);
       translate([carrier_outer_radius, 0, layer_thickness])
