@@ -58,7 +58,7 @@ COLORS = {
     "sun_to_lunar_phases": (204, 51, 255),
     "sun_to_lunar_nodes": (0, 51, 204),
     "structure": (235, 228, 155),
-    "spacers": (235, 228, 155),
+    "misc": (235, 228, 155),
     "shafts": (255, 184, 51),
     "carrier_1": (255, 184, 51),
     "carrier_2": (255, 184, 51),
@@ -181,7 +181,7 @@ def rotate(part, rotation: float, orient_axis="X"):
     part.select_set(False)
 
 
-def position_spacers(parts):
+def position_misc(parts):
     translate(
         parts["c1_c2"],
         STRUCT_CONSTANTS["carrier_outer_radius"],
@@ -370,7 +370,7 @@ def main():
     position_gears(parts)
     position_shafts(parts)
     position_structure(parts["structure"])
-    position_spacers(parts["structure"]["spacers"])
+    position_misc(parts["structure"]["misc"])
     position_tympan(parts["tympan"])
 
     set_view()
