@@ -4,6 +4,8 @@ DATA = {
     "carrier_outer_radius": 200,
     "outer_annulus_sagitta": 15,
     "annulus_sagitta": 6,
+    "top_platform_height": 6,
+    "bottom_support_height": 6,
     "spoke_width": 2
     * (constants.DATA["gears_shaft_radius"] + constants.DATA["spacer_sleeve"]),
     "nb_of_annuli": 3,

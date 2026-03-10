@@ -19,6 +19,7 @@ DATA = {
     "clock_shaft_radius": 7.1 / 2,
     "obs_latitude": 47.7343,
     "motor_shaft_diameter": 3.1 / _global_scale,
+    "moon_radius": 30,
 }
 
 DATA["gear_thickness"] = DATA["layer_thickness"] - DATA["half_allowance"]
