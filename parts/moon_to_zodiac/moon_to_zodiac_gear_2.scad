@@ -11,14 +11,14 @@ scale([global_scale, global_scale, global_scale])
   difference() {
     union() {
       default_gear(nb, m);
-      translate(v = [0, 0, gear_thickness - eps])
+      translate(v=[0, 0, gear_thickness - eps])
         default_gear(na, m);
     }
-    circular_hole(radius = gears_shaft_radius, length = 2);
+    circular_hole(radius=gears_shaft_radius, length=2);
 
-    for(theta = [0:360 / 8:360])
-      circular_hole(r = 4 / 7 * na * m / 2, theta = theta, radius = 1 / 16 * na * m, length = 2);
+    for (theta = [0:360 / 8:360])
+      circular_hole(r=4 / 7 * na * m / 2, theta=theta, radius=1 / 16 * na * m, length=2);
 
-    for(theta = [0:360 / 16:360])
-      circular_hole(r = 4 / 5 * nb * m / 2, theta = theta, radius = 1 / 25 * nb * m);
+    for (theta = [0:360 / 16:360])
+      circular_hole(r=4 / 5 * nb * m / 2, theta=theta, radius=1 / 25 * nb * m);
   }

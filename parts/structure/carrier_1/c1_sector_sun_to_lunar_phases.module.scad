@@ -3,10 +3,9 @@ include <../../../utils/structure.scad>
 include <../../../utils/constants/constants.scad>
 include <../../../utils/constants/structure.scad>
 
-module sun_to_lunar_phases() {}
+module sun_to_lunar_phases(){}
 
-module sun_to_lunar_phases_drill() {
-}
+module sun_to_lunar_phases_drill(){}
 
 difference() {
   union() {

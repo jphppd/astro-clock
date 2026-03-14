@@ -42,7 +42,7 @@ scale([global_scale, global_scale, global_scale])
     rotate(sun_to_lunar_phases_theta)
       sun_to_lunar_phases_drill();
 
-    for(theta = [-90 - clamp_angle, -90 + clamp_angle, 90 - clamp_angle, 90 + clamp_angle])
+    for (theta = [-90 - clamp_angle, -90 + clamp_angle, 90 - clamp_angle, 90 + clamp_angle])
       rotate(theta)
-        circular_hole(r = carrier_outer_radius, theta = 0);
+        circular_hole(r=carrier_outer_radius, theta=0);
   }

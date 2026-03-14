@@ -7,8 +7,8 @@ shaft_length = (2 + 5);
 scale([global_scale, global_scale, global_scale])
   difference() {
     union() {
-      circular_shaft(radius = lunar_nodes_shaft_radius, length = shaft_length);
-      hex_shaft(apothem = lunar_nodes_shaft_radius);
+      circular_shaft(radius=lunar_nodes_shaft_radius, length=shaft_length);
+      hex_shaft(apothem=lunar_nodes_shaft_radius);
     }
-    circular_hole(radius = sun_shaft_radius_lunar_nodes, length = shaft_length);
+    circular_hole(radius=sun_shaft_radius_lunar_nodes, length=shaft_length);
   }

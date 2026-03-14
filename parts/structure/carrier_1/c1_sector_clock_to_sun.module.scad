@@ -6,13 +6,12 @@ include <../../../utils/constants/structure.scad>
 
 module clock_to_sun() {
   spoke();
-  circular_shaft(r = carrier_outer_radius, theta = 0, length = carrier_3_offset + 1);
+  circular_shaft(r=carrier_outer_radius, theta=0, length=carrier_3_offset + 1);
   translate([carrier_outer_radius, 0, layer_thickness])
     fillet(gears_shaft_radius - half_allowance, gears_shaft_radius + 3);
 }
 
-module clock_to_sun_drill() {
-}
+module clock_to_sun_drill(){}
 
 difference() {
   union() {

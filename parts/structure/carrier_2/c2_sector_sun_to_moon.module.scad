@@ -9,8 +9,8 @@ module sun_to_moon() {
 }
 
 module sun_to_moon_drill() {
-  circular_hole(r = sun_to_moon_2_r, theta = 0, length = layer_thickness);
-  circular_hole(r = carrier_outer_radius, theta = 0);
+  circular_hole(r=sun_to_moon_2_r, theta=0, length=layer_thickness);
+  circular_hole(r=carrier_outer_radius, theta=0);
 }
 
 difference() {

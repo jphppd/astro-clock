@@ -8,13 +8,12 @@ m = sun_to_moon_1_2_mod;
 
 scale([global_scale, global_scale, global_scale])
   difference() {
-    default_gear(n, m, invert = true);
-    hex_hole(apothem = gears_shaft_radius + spacer_sleeve);
+    default_gear(n, m, invert=true);
+    hex_hole(apothem=gears_shaft_radius + spacer_sleeve);
 
-    rotate(360 / 12)
-      for(theta = [0:360 / 6:360])
-        circular_hole(r = 1 / 2 * n * m / 2, theta = theta, radius = 1 / 10 * n * m);
+    rotate(360 / 12)for (theta = [0:360 / 6:360])
+      circular_hole(r=1 / 2 * n * m / 2, theta=theta, radius=1 / 10 * n * m);
 
-    for(theta = [0:360 / 6:360])
-      circular_hole(r = 8 / 11 * n * m / 2, theta = theta, radius = 1 / 18 * n * m);
+    for (theta = [0:360 / 6:360])
+      circular_hole(r=8 / 11 * n * m / 2, theta=theta, radius=1 / 18 * n * m);
   }

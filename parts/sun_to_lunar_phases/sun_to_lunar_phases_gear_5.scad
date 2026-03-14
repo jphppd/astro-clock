@@ -17,16 +17,14 @@ scale([global_scale, global_scale, global_scale])
         bevel_gear(nb, mb);
     }
 
-    circular_hole(length = 2);
+    circular_hole(length=2);
 
-    rotate(360 / 12)
-      for(theta = [0:360 / 6:360])
-        circular_hole(r = 4 / 9 * na * ma / 2, theta = theta, radius = 1 / 12 * na * ma);
+    rotate(360 / 12)for (theta = [0:360 / 6:360])
+      circular_hole(r=4 / 9 * na * ma / 2, theta=theta, radius=1 / 12 * na * ma);
 
-    for(theta = [0:360 / 6:360])
-      circular_hole(r = 3 / 4 * na * ma / 2, theta = theta, radius = 1 / 16 * na * ma);
+    for (theta = [0:360 / 6:360])
+      circular_hole(r=3 / 4 * na * ma / 2, theta=theta, radius=1 / 16 * na * ma);
 
-    rotate(360 / 12)
-      for(theta = [0:360 / 6:360])
-        circular_hole(r = 5 / 6 * na * ma / 2, theta = theta, radius = 1 / 24 * na * ma);
+    rotate(360 / 12)for (theta = [0:360 / 6:360])
+      circular_hole(r=5 / 6 * na * ma / 2, theta=theta, radius=1 / 24 * na * ma);
   }

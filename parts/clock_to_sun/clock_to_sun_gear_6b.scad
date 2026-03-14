@@ -12,10 +12,10 @@ scale([global_scale, global_scale, global_scale])
     union() {
       default_gear(n, m);
       translate([0, 0, layer_thickness])
-        circular_shaft(radius = gears_shaft_radius + spacer_sleeve + 1, length = shaft_length - 2);
+        circular_shaft(radius=gears_shaft_radius + spacer_sleeve + 1, length=shaft_length - 2);
       translate([0, 0, (shaft_length - 1) * layer_thickness])
-        hex_shaft(circumradius = gears_shaft_radius + spacer_sleeve - 0.5);
+        hex_shaft(circumradius=gears_shaft_radius + spacer_sleeve - 0.5);
     }
-    circular_hole(radius = gears_shaft_radius, length = shaft_length);
+    circular_hole(radius=gears_shaft_radius, length=shaft_length);
   }
 ;

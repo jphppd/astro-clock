@@ -43,15 +43,15 @@ module carrier_without_motor() {
     rotate(sun_to_lunar_phases_theta)
       sun_to_lunar_phases_drill();
 
-    for(theta = [-90 - clamp_angle, -90 + clamp_angle, 90 - clamp_angle, 90 + clamp_angle])
+    for (theta = [-90 - clamp_angle, -90 + clamp_angle, 90 - clamp_angle, 90 + clamp_angle])
       rotate(theta)
-        circular_hole(r = carrier_outer_radius, theta = 0);
+        circular_hole(r=carrier_outer_radius, theta=0);
   }
 }
 
-module carrier()translate([0, 0, -layer_thickness / 2]) {
-  carrier_without_motor();
-  translate([0, -clock_to_sun_1_r, 0])
-    rotate(90)
-      main_cap(wall_width);
-}
+module carrier() translate([0, 0, -layer_thickness / 2]) {
+    carrier_without_motor();
+    translate([0, -clock_to_sun_1_r, 0])
+      rotate(90)
+        main_cap(wall_width);
+  }

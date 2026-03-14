@@ -11,5 +11,5 @@ scale([global_scale, global_scale, global_scale])
   difference() {
     bevel_gear(n, m);
     translate([0, 0, -layer_thickness])
-      hex_hole(circumradius = lunar_phases_shaft_radius, length = 2 * layer_thickness);
+      hex_hole(circumradius=lunar_phases_shaft_radius, length=2 * layer_thickness);
   }

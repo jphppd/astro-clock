@@ -10,10 +10,10 @@ n = sun_to_lunar_phases_6_n;
 m = sun_to_lunar_phases_5b_6_mod;
 z_half_moon = 2 * layer_thickness + bevel_gear_center(n, m);
 
-module half_moon()difference() {
-  sphere(r = moon_radius);
-  rotate([90, 0, 0])
-    cylinder(r = lunar_phases_shaft_radius, h = moon_radius);
-  translate([0, 0, -moon_radius])
-    cube(2 * moon_radius, center = true);
-}
+module half_moon() difference() {
+    sphere(r=moon_radius);
+    rotate([90, 0, 0])
+      cylinder(r=lunar_phases_shaft_radius, h=moon_radius);
+    translate([0, 0, -moon_radius])
+      cube(2 * moon_radius, center=true);
+  }
