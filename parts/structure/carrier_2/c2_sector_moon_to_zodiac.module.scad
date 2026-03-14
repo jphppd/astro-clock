@@ -10,9 +10,7 @@ module moon_to_zodiac() {
       spoke();
   }
   mirror([0, 0, 1]) {
-    circular_shaft(r=moon_to_zodiac_2_r, theta=moon_to_zodiac_2_theta, length=3, radius=gears_shaft_radius + spacer_sleeve);
-    circular_shaft(r=moon_to_zodiac_3_r, theta=moon_to_zodiac_3_theta, length=2, radius=gears_shaft_radius + spacer_sleeve);
-    circular_shaft(r=moon_to_zodiac_4_r, theta=moon_to_zodiac_4_theta, length=1, radius=gears_shaft_radius + spacer_sleeve);
+    circular_shaft(r=moon_to_zodiac_2_r, theta=moon_to_zodiac_2_theta, length=1, radius=gears_shaft_radius + spacer_sleeve);
   }
 }
 

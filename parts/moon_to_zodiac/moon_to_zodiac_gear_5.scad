@@ -4,7 +4,7 @@ include <../../utils/constants/constants.scad>
 include <../../utils/constants/moon_to_zodiac/env.scad>
 
 n = moon_to_zodiac_5_n;
-m = moon_to_zodiac_mod;
+m = moon_to_zodiac_4b_5_mod;
 
 scale([global_scale, global_scale, global_scale])
   difference() {

@@ -5,13 +5,23 @@ include <../../../utils/constants/constants.scad>
 include <../../../utils/constants/structure.scad>
 
 module clock_to_sun() {
-  spoke();
+  for (angle = [0, clock_to_sun_1_theta, clock_to_sun_2_theta]) {
+    rotate(angle)
+      spoke();
+  }
+
+  circular_shaft(r=clock_to_sun_1_r, theta=clock_to_sun_1_theta, length=2, radius=gears_shaft_radius);
+  circular_shaft(r=clock_to_sun_2_r, theta=clock_to_sun_2_theta, length=4, radius=gears_shaft_radius + spacer_sleeve);
+
   circular_shaft(r=carrier_outer_radius, theta=0, length=carrier_3_offset + 1);
   translate([carrier_outer_radius, 0, layer_thickness])
     fillet(gears_shaft_radius - half_allowance, gears_shaft_radius + 3);
 }
 
-module clock_to_sun_drill(){}
+module clock_to_sun_drill() {
+  translate([0, 0, layer_thickness - half_allowance])
+    circular_hole(r=clock_to_sun_2_r, theta=clock_to_sun_2_theta, length=4, radius=gears_shaft_radius);
+}
 
 difference() {
   union() {

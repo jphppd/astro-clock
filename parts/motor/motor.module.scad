@@ -78,22 +78,23 @@ module top_contour_wo_screw(wall_width) difference() {
     circle(motor_outer_diameter_top / 2 + half_allowance);
   }
 
-module top_contour(wall_width) translate([0, 0, -4 * screw_plate_height]) {
-    translate([0, 0, 3 * screw_plate_height - eps])
+module top_contour(wall_width) translate([0, 0, -layer_thickness]) {
+    translate([0, 0, layer_thickness - screw_plate_height - eps])
       linear_extrude(screw_plate_height + eps)
         top_contour_w_screw(wall_width);
 
     difference() {
-      linear_extrude(3 * screw_plate_height - eps)
+      linear_extrude(layer_thickness - screw_plate_height - eps)
         top_contour_wo_screw(wall_width);
+
       place_pins()
         translate([0, 0, 2 * screw_plate_height])
           cylinder(h=screw_plate_height + eps, r=screwhole_radius + half_allowance / 2);
     }
 
     place_pins()
-      translate([0, 0, 2 * screw_plate_height - eps])
-        cylinder(h=2 * screw_plate_height + layer_thickness + eps, r1=screwhole_radius - eps, r2=0.92 * screwhole_radius);
+      translate([0, 0, layer_thickness - screw_plate_height - eps])
+        cylinder(h=screw_plate_height + layer_thickness, r1=screwhole_radius - eps, r2=0.92 * screwhole_radius);
   }
 
 module motor_cylinder(wall_width, top_height = 0) translate([0, 0, -motor_height])
@@ -128,7 +129,7 @@ module bottom(wall_width) translate([0, 0, -motor_height - motor_case_bottom_hei
 
 module main_case(wall_width) translate([shaft_position, 0, 0]) {
     top_contour(wall_width);
-    motor_cylinder(wall_width, 4 * screw_plate_height);
+    motor_cylinder(wall_width, layer_thickness);
     bottom(wall_width);
   }
 

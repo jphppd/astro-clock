@@ -5,9 +5,9 @@ from . import env
 DATA = {
     "theta": 17 / 10 * math.pi,
     "c3_mirror": True,
-    "2_mirror": True,
-    "1_offset": 1,
-    "2_offset": 2,
+    "1_mirror": True,
+    "1_offset": -1,
+    "2a_offset": -2,
     "4_offset": 1,
     "5_offset": 2,
     "6a_offset": 3,
@@ -26,7 +26,8 @@ rCD = (env.DATA["1_n"] + env.DATA["2a_n"]) * env.DATA["1_2a_mod"] / 2
 
 
 rOD = 134 / 0.75
-thetaOA = math.radians(-28) - DATA["theta"]
+rOD = 115 / 0.75
+thetaOA = math.radians(-27) - DATA["theta"]
 thetaAB = math.radians(-90) - DATA["theta"]
 thetaOD = -math.radians(90) - DATA["theta"]
 
@@ -86,6 +87,8 @@ DATA = {
     **DATA,
     "1_r": rOD,
     "2_r": rOC,
+    "2a_r": rOC,
+    "2b_r": rOC,
     "3_r": rOB,
     "4_r": rOA,
     "5_r": rOB,
@@ -94,6 +97,8 @@ DATA = {
     "7_r": 0.0,
     "1_theta": thetaOD,
     "2_theta": thetaOC,
+    "2a_theta": thetaOC,
+    "2b_theta": thetaOC,
     "3_theta": thetaOB,
     "4_theta": thetaOA,
     "5_theta": thetaOB,
@@ -103,5 +108,6 @@ DATA = {
     "dist_25": rBC,
     "dist_36": rAB,
     "dist_67": rOA,
+    "dist_24": math.hypot(xOC - xOA, yOC - yOA),
     "gears": env.DATA,
 }

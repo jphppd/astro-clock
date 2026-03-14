@@ -18,16 +18,17 @@ module platform() difference() {
         circular_hole(radius=lunar_phases_shaft_radius, length=3);
   }
 
-scale([global_scale, global_scale, global_scale]) {
-  rotate([0, 0, 180]) {
-    for (theta = [-90 - clamp_angle, -90 + clamp_angle])
-      rotate(theta)
-        translate([carrier_outer_radius, 0, 0])
-          clamp();
-    for (tz = [carrier_2_offset - carrier_1_offset, carrier_3_offset - carrier_1_offset])
-      translate([0, 0, tz * layer_thickness])
-        arc_support(top_platform_height);
+scale([global_scale, global_scale, global_scale])
+  translate([0, 0, -carrier_2_offset * layer_thickness]) {
+    rotate([0, 0, 180]) {
+      for (theta = [-90 - clamp_angle, -90 + clamp_angle])
+        rotate(theta)
+          translate([carrier_outer_radius, 0, 0])
+            clamp();
+      for (tz = [carrier_2_offset - carrier_1_offset, carrier_3_offset - carrier_1_offset])
+        translate([0, 0, tz * layer_thickness])
+          arc_support(top_platform_height);
+    }
+    translate([0, r_platform, (carrier_2_offset - carrier_1_offset) * layer_thickness])
+      platform();
   }
-  translate([0, r_platform, (carrier_2_offset - carrier_1_offset) * layer_thickness])
-    platform();
-}

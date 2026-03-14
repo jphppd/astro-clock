@@ -14,7 +14,7 @@ scale([global_scale, global_scale, global_scale])
       translate([0, 0, (shaft_length - 1) * layer_thickness])
         hex_shaft(apothem=gears_shaft_radius + spacer_sleeve);
       translate([0, 0, layer_thickness])
-        circular_shaft(radius=gears_shaft_radius + 2 * spacer_sleeve, length=shaft_length - 2);
+        circular_shaft(radius=gears_shaft_radius + 1.5 * spacer_sleeve, length=shaft_length - 2);
     }
     circular_hole(radius=gears_shaft_radius, length=shaft_length);
 

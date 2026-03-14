@@ -8,7 +8,7 @@ r_half_moon = r_platform + 5 + moon_radius;
 
 n = sun_to_lunar_phases_6_n;
 m = sun_to_lunar_phases_5b_6_mod;
-z_half_moon = 2 * layer_thickness + bevel_gear_center(n, m);
+z_half_moon = (2 - carrier_2_offset) * layer_thickness + bevel_gear_center(n, m);
 
 module half_moon() difference() {
     sphere(r=moon_radius);

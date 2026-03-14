@@ -8,10 +8,10 @@ scale([global_scale, global_scale, global_scale])
   difference() {
     union() {
       circular_shaft(radius=sun_shaft_radius_lunar_nodes, length=shaft_length);
-      translate([0, 0, 7 * layer_thickness])
+      translate([0, 0, 6 * layer_thickness])
         hex_shaft(circumradius=sun_shaft_radius_c3_hub, length=1);
       translate([0, 0, 4 * layer_thickness])
-        circular_shaft(radius=sun_shaft_radius_lunar_phases, length=3);
+        circular_shaft(radius=sun_shaft_radius_lunar_phases, length=2);
       translate([0, 0, 2 * layer_thickness])
         hex_shaft(apothem=sun_shaft_radius, length=2);
       translate([0, 0, layer_thickness])

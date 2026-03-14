@@ -26,10 +26,10 @@ SCALE = 1e-3
 LAYER_THICKNESS = CONSTANTS["layer_thickness"]
 
 OFFSET_CARRIER = {}
-OFFSET_CARRIER["1"] = 0
-OFFSET_SUN_TO_MOON = 1
+OFFSET_CARRIER["2"] = 0
+OFFSET_SUN_TO_MOON = -4
 OFFSET_MOON_TO_ZODIAC = OFFSET_SUN_TO_MOON + 1
-OFFSET_CARRIER["2"] = OFFSET_MOON_TO_ZODIAC + 5
+OFFSET_CARRIER["1"] = OFFSET_SUN_TO_MOON - 1
 OFFSET_CLOCK_TO_SUN = OFFSET_CARRIER["2"] + 1
 OFFSET_SUN_TO_LUNAR_PHASES = OFFSET_CLOCK_TO_SUN
 OFFSET_SUN_TO_LUNAR_NODES = OFFSET_SUN_TO_LUNAR_PHASES + 4
@@ -63,6 +63,7 @@ COLORS = {
     "carrier_1": (255, 184, 51),
     "carrier_2": (255, 184, 51),
     "carrier_3": (255, 184, 51),
+    "motor": (255, 184, 51),
     "moon_shaft": (0, 153, 0),
     "zodiac_shaft": (255, 0, 0),
     "lunar_phases_shaft": (204, 51, 255),
@@ -207,7 +208,7 @@ def position_shafts(parts):
         parts["shafts"]["zodiac_shaft"],
         0,
         0,
-        (STRUCT["moon_to_zodiac"]["offset"] + 3) * LAYER_THICKNESS,
+        (STRUCT["moon_to_zodiac"]["offset"] + 1) * LAYER_THICKNESS,
     )
     translate(
         parts["shafts"]["lunar_nodes_shaft"],
@@ -220,6 +221,12 @@ def position_shafts(parts):
         0,
         0,
         (STRUCT["clock_to_sun"]["offset"] - 2) * LAYER_THICKNESS,
+    )
+    translate(
+        parts["shafts"]["clock_to_sun_shaft"],
+        STRUCT["clock_to_sun"]["2_r"],
+        STRUCT["clock_to_sun"]["theta"] + STRUCT["clock_to_sun"]["2_theta"],
+        STRUCT["clock_to_sun"]["offset"] * LAYER_THICKNESS,
     )
     translate(
         parts["shafts"]["lunar_phases_shaft"],

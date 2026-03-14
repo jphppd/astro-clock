@@ -1,24 +1,42 @@
 module translate_polar(r, theta, z = 0) translate(v=[r * cos(theta), r * sin(theta), z])
     children();
 
-module circular_shaft(radius = gears_shaft_radius, length = 1, r = 0, theta = 0, $fn = 128) //
-  translate_polar(r, theta, 0)
-    cylinder(h=length * layer_thickness, r=radius - half_allowance, $fn=$fn);
-
-module circular_hole(radius = gears_shaft_radius, length = 1, r = 0, theta = 0, $fn = 128) //
-  translate_polar(r, theta, -eps)
-    cylinder(h=length * layer_thickness + 2 * eps, r=radius + half_allowance, $fn=$fn);
-
-module hex_shaft(apothem = 0, circumradius = 0, length = 1, r = 0, theta = 0) circular_shaft(
-    //
-    radius=max(apothem / cos(180 / $fn), circumradius), //
-    length=length, r=r, theta=theta, $fn=6
+module pattern(radius, n, radius_offset, stellation_ratio = undef, stellation_radius = undef) let (
+    alpha = (is_undef(stellation_ratio) && !is_undef(stellation_radius)) ? (stellation_radius / radius)
+    : (!is_undef(stellation_ratio) && is_undef(stellation_radius)) ? stellation_ratio : 1
+  )
+  polygon(
+    [
+      for (i = [0:(2 * n)]) let (
+        th = 360 * i / (2 * n),
+        r = (i % 2 == 1) ? radius + radius_offset : alpha * radius + radius_offset
+      ) [r * cos(th), r * sin(th)],
+    ]
   );
 
-module hex_hole(apothem = 0, circumradius = 0, length = 1, r = 0, theta = 0) circular_hole(
-    //
-    radius=max(apothem / cos(180 / $fn), circumradius), //
-    length=length, r=r, theta=theta, $fn=6
+module extruded_pattern(radius, radius_offset = 0, n = 64, length = 1, r = 0, theta = 0, stellation_ratio = undef, stellation_radius = undef, z = 0)
+  translate_polar(r, theta, 0)
+    linear_extrude(length * layer_thickness)
+      pattern(radius, n, radius_offset, stellation_ratio=stellation_ratio, stellation_radius=stellation_radius);
+
+module circular_shaft(radius = gears_shaft_radius, length = 1, r = 0, theta = 0, n = 64, stellation_ratio = undef, stellation_radius = undef)
+  extruded_pattern(radius=radius, radius_offset=-half_allowance, length=length, r=r, theta=theta, n=n, stellation_ratio=stellation_ratio, stellation_radius=stellation_radius);
+
+module circular_hole(radius = gears_shaft_radius, length = 1, r = 0, theta = 0, n = 64, stellation_ratio = undef, stellation_radius = undef)
+  extruded_pattern(radius=radius, radius_offset=+half_allowance, length=length + 2 * eps, r=r, theta=theta, n=n, stellation_ratio=stellation_ratio, stellation_radius=stellation_radius, z=-eps);
+
+module hex_shaft(apothem = undef, circumradius = undef, length = 1, r = 0, theta = 0, stellation_ratio = undef, stellation_radius = undef)
+  circular_shaft(
+    radius=(is_undef(apothem) && !is_undef(circumradius)) ? circumradius
+    : (!is_undef(apothem) && is_undef(circumradius)) ? apothem / cos(180 / 6) : undef, length=length, r=r, theta=theta, stellation_ratio=is_undef(stellation_ratio) && is_undef(stellation_radius)? cos(180/6) : 
+  stellation_ratio, stellation_radius=stellation_radius, n=6
+  );
+
+module hex_hole(apothem = undef, circumradius = undef, length = 1, r = 0, theta = 0, stellation_ratio = undef, stellation_radius = undef)
+  circular_hole(
+    radius=(is_undef(apothem) && !is_undef(circumradius)) ? circumradius
+    : (!is_undef(apothem) && is_undef(circumradius)) ? apothem / cos(180 / 6) : undef, length=length, r=r, theta=theta, stellation_ratio=is_undef(stellation_ratio) && is_undef(stellation_radius)? cos(180/6) : 
+  stellation_ratio, stellation_radius=stellation_radius, n=6
   );
 
 module dovetail() translate([0, 1 / 8, 0])

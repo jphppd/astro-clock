@@ -10,7 +10,7 @@ DATA = {
     "half_allowance": 0.1 / _global_scale,
     "spacer_sleeve": 3,
     "layer_thickness": 4 / _global_scale,
-    "carrier_1_width": 7,
+    "carrier_1_width": 5,
     "carrier_2_width": 7,
     "ecliptic_inclination": 23.44,
     "gears_shaft_radius": 4.0,

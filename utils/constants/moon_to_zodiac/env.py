@@ -1,7 +1,10 @@
 from fractions import Fraction
 
 DATA = {
-    "mod": 1.0,
+    "1_2a_mod": 1.44,
+    "2b_3a_mod": 1.13,
+    "3b_4a_mod": 1.3,
+    "4b_5_mod": 1.42,
     "1_n": 131,
     "2a_n": 60,
     "2b_n": 103,
