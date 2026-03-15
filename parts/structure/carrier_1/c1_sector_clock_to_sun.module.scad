@@ -10,7 +10,7 @@ module clock_to_sun() {
       spoke();
   }
 
-  circular_shaft(r=clock_to_sun_1_r, theta=clock_to_sun_1_theta, length=2, radius=gears_shaft_radius);
+  circular_shaft(r=clock_to_sun_1_r, theta=clock_to_sun_1_theta, length=carrier_2_offset - carrier_1_offset - motor_shaft_height_above_carrier / layer_thickness - half_allowance, radius=gears_shaft_radius);
   circular_shaft(r=clock_to_sun_2_r, theta=clock_to_sun_2_theta, length=4, radius=gears_shaft_radius + spacer_sleeve);
 
   circular_shaft(r=carrier_outer_radius, theta=0, length=carrier_3_offset + 1);

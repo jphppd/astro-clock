@@ -51,12 +51,10 @@ module carrier_without_motor() {
 
 module place_motor() translate([0, -clock_to_sun_1_r, 0]) rotate(-90) children();
 
-module motor_cap() translate([shaft_position, 0, 0]) linear_extrude(layer_thickness) screw_plate_case(wall_width);
-
 module carrier() translate([0, 0, -layer_thickness / 2]) {
     difference() {
       carrier_without_motor();
-      place_motor() motor_cap();
+      place_motor() main_cap(wall_width);
     }
-    place_motor() main_cap(wall_width);
+    place_motor() main_cap_drilled(wall_width);
   }

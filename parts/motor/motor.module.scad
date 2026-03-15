@@ -18,12 +18,12 @@ shaft_position = 13 / global_scale;
 
 // Screw plate
 screw_plate_height = 1.4 / global_scale;
-screw_plate_overhead = (6 - screwhole_radius) / global_scale;
+screw_plate_overhead = (7 - screwhole_radius) / global_scale;
 screw_plate_width = 14.4 / global_scale;
 screw_plate_hole_radius = 28.4 / global_scale;
 screw_plate_hole_radius_delta = 0.1 / global_scale;
-screw_plate_hole_theta = 83.3 / global_scale;
-screw_plate_hole_theta_delta = 13.5647 / 2 / global_scale;
+screw_plate_hole_theta = 83.3;
+screw_plate_hole_theta_delta = 13.5647 / 2;
 
 // Plugs and switch
 plug_switch_height = 21 / global_scale;
@@ -41,8 +41,8 @@ screw_plate_hole_2_x = screw_plate_hole_radius_2 * cos(screw_plate_holes_theta_2
 screw_plate_hole_2_y = screw_plate_hole_radius_2 * sin(screw_plate_holes_theta_2);
 screw_plate_delta_theta = atan((screw_plate_hole_2_y - screw_plate_hole_1_y) / (screw_plate_hole_2_x - screw_plate_hole_1_x));
 
-module screw_plate()for (i = [0, 1])
-    mirror([0, i, 0])
+module screw_plate()for (y = [0, 1])
+    mirror([0, y, 0])
       translate([(screw_plate_hole_2_x + screw_plate_hole_1_x) / 2, (screw_plate_hole_2_y + screw_plate_hole_1_y) / 2, 0])
         rotate(screw_plate_delta_theta)
           translate([-screw_plate_width / 2, -20, 0])
@@ -135,16 +135,21 @@ module main_case(wall_width) translate([shaft_position, 0, 0]) {
 
 module main_cap(wall_width) linear_extrude(layer_thickness)
     translate([shaft_position, 0, 0])
-      difference() {
-        union() {
-          screw_plate_case(wall_width);
-          circle(r=motor_outer_diameter_top / 2 + wall_width);
-        }
+      union() {
+        screw_plate_case(wall_width);
+        circle(r=motor_outer_diameter_top / 2 + wall_width);
+      }
+
+module main_cap_drilled(wall_width) difference() {
+    main_cap(wall_width);
+    linear_extrude(layer_thickness)
+      translate([shaft_position, 0, 0]) {
         place_pins()
           circle(r=screwhole_radius + 10 * eps);
         translate([-shaft_position, 0, 0])
           circle(r=shaft_base_radius);
       }
+  }
 
 module cap_holder(width, height, tolerance) mirror([0, 0, 1])
     translate([0, shaft_position, 0])

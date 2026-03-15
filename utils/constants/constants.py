@@ -7,7 +7,7 @@ DATA = {
     "$fn": 64,
     "eps": 0.001,
     "global_scale": _global_scale,
-    "half_allowance": 0.1 / _global_scale,
+    "half_allowance": 0.11 / _global_scale,
     "spacer_sleeve": 3,
     "layer_thickness": (21 / 5) / _global_scale,
     "carrier_1_width": 5,
@@ -16,10 +16,12 @@ DATA = {
     "gears_shaft_radius": 4.0,
     "sun_shaft_radius": 20.0,
     "lunar_phases_shaft_radius": 4.0 / _global_scale,
-    "clock_shaft_radius": 7.1 / 2,
-    "obs_latitude": 47.7343,
-    "motor_shaft_diameter": 3.1 / _global_scale,
+    "motor_shaft_radius": 7.1 / _global_scale / 2,
+    "motor_coupling_hole_diameter": 3.1 / _global_scale,
+    "motor_shaft_height_above_carrier": 13.5 / _global_scale,
+    "motor_coupling_shaft_height_above_carrier": (7.6 + 4.65) / 2 / _global_scale,
     "moon_radius": 30,
+    "obs_latitude": 47.7343,
 }
 
 DATA["gear_thickness"] = DATA["layer_thickness"] - DATA["half_allowance"]
