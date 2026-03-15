@@ -4,7 +4,7 @@ include <../../utils/constants/clock_to_sun/env.scad>
 include <../../utils/constants/constants.scad>
 
 n = clock_to_sun_6b_n;
-m = clock_to_sun_6b_7_mod;
+m = clock_to_sun_6b_7_8_mod;
 shaft_length = 4;
 
 scale([global_scale, global_scale, global_scale])

@@ -55,7 +55,7 @@ module carrier() difference() {
       }
       mirror([0, 0, 1])
         translate([0, -clock_to_sun_1_r, 0])
-          translate([0, 0, 6 * layer_thickness])
+          translate([0, 0, 5 * layer_thickness])
             rotate(-90)
               main_case(wall_width);
     }

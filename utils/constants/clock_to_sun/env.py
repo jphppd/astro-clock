@@ -5,7 +5,7 @@ DATA = {
     "1_2a_mod": 1.6,
     "2b_3a_mod": 1.55,
     "3b_4a_mod": 1.35,
-    "6b_7_mod": 1.68,
+    "6b_7_8_mod": 1.68,
     "1_n": 23,
     "2a_n": 50,
     "2b_n": 21,
@@ -17,7 +17,8 @@ DATA = {
     "5b_n": 23,
     "6a_n": 70,
     "6b_n": 15,
-    "7_n": 92,
+    "7_n": 53,
+    "8_n": 92,
 }
 
 
@@ -35,9 +36,10 @@ ratio_3_4 = Fraction(DATA["3b_n"], DATA["4a_n"])
 ratio_4_5 = Fraction(DATA["4b_n"], DATA["5a_n"])
 ratio_5_6 = Fraction(DATA["5b_n"], DATA["6a_n"])
 ratio_6_7 = Fraction(DATA["6b_n"], DATA["7_n"])
+ratio_7_8 = Fraction(DATA["7_n"], DATA["8_n"])
 
 assert (
-    ratio_1_2 * ratio_2_3 * ratio_3_4 * ratio_4_5 * ratio_5_6 * ratio_6_7
+    ratio_1_2 * ratio_2_3 * ratio_3_4 * ratio_4_5 * ratio_5_6 * ratio_6_7 * ratio_7_8
     == Fraction(207, 320000)
 )
 
@@ -47,3 +49,4 @@ assert math.gcd(DATA["3b_n"], DATA["4a_n"]) == 1
 assert math.gcd(DATA["4b_n"], DATA["5a_n"]) == 1
 assert math.gcd(DATA["5b_n"], DATA["6a_n"]) == 1
 assert math.gcd(DATA["6b_n"], DATA["7_n"]) == 1
+assert math.gcd(DATA["7_n"], DATA["8_n"]) == 1

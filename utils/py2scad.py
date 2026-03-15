@@ -5,6 +5,10 @@ import os
 from math import degrees
 
 
+def wrap_angle(angle_deg):
+    return (angle_deg + 180) % 360 - 180
+
+
 def main(source_path, target_path):
     source_path = Path(os.getcwd()) / source_path
     source_path = source_path.relative_to(Path(__file__).parent)
@@ -23,7 +27,7 @@ def main(source_path, target_path):
         if isinstance(value, bool):
             continue
         if key.endswith("theta"):
-            value = degrees(value)
+            value = wrap_angle(degrees(value))
         if key == "gears":
             continue
         target_text.append(f"{prefix}{key} = {value};")

@@ -7,7 +7,7 @@ wall_width = 2.5 / global_scale;
 motor_height = 21 / global_scale;
 motor_outer_diameter_top = 50 / global_scale;
 motor_outer_diameter_bottom = 49.6 / global_scale;
-motor_case_bottom_height = (7 * layer_thickness - motor_height);
+motor_case_bottom_height = (6 * layer_thickness - motor_height);
 screwhole_radius = 4.45 / 2 / global_scale;
 cables_hole_center = motor_outer_diameter_bottom / 2 - 4.5 / global_scale;
 

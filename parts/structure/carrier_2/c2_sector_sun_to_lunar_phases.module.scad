@@ -10,13 +10,12 @@ module sun_to_lunar_phases() {
       spoke();
   }
 
-  circular_shaft(r=sun_to_lunar_phases_2_r, theta=sun_to_lunar_phases_2_theta, length=carrier_3_offset - carrier_2_offset + 1);
+  circular_shaft(r=sun_to_lunar_phases_2_r, theta=sun_to_lunar_phases_2_theta, length=carrier_3_offset - carrier_2_offset);
+  circular_shaft(r=sun_to_lunar_phases_3_r, theta=sun_to_lunar_phases_3_theta, length=carrier_3_offset - carrier_2_offset);
+  circular_shaft(r=sun_to_lunar_phases_4_r, theta=sun_to_lunar_phases_4_theta, length=carrier_3_offset - carrier_2_offset);
+
   circular_shaft(r=sun_to_lunar_phases_2_r, theta=sun_to_lunar_phases_2_theta, length=2, radius=gears_shaft_radius + spacer_sleeve);
-
-  circular_shaft(r=sun_to_lunar_phases_3_r, theta=sun_to_lunar_phases_3_theta, length=carrier_3_offset - carrier_2_offset + 1);
   circular_shaft(r=sun_to_lunar_phases_3_r, theta=sun_to_lunar_phases_3_theta, length=3, radius=gears_shaft_radius + spacer_sleeve);
-
-  circular_shaft(r=sun_to_lunar_phases_4_r, theta=sun_to_lunar_phases_4_theta, length=carrier_3_offset - carrier_2_offset + 1);
 }
 
 module sun_to_lunar_phases_drill() {

@@ -5,7 +5,7 @@ include <../../../utils/constants/constants.scad>
 include <../../../utils/constants/structure.scad>
 
 module clock_to_sun() {
-  for (angle = [0, clock_to_sun_1_theta, clock_to_sun_2_theta]) {
+  for (angle = [0, clock_to_sun_1_theta, clock_to_sun_2_theta, 2 * clock_to_sun_1_theta - clock_to_sun_2_theta]) {
     rotate(angle)
       spoke();
   }

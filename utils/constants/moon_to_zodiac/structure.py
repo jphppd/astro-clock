@@ -47,11 +47,11 @@ d13 = cosine_law_a(d12, d23, a123)
 a213 = cosine_law_alpha(d12, d13, d23)
 
 DATA["2_r"] = d12
-DATA["2_theta"] = -DATA["aperture_theta"] / 2
+DATA["2_theta"] = DATA["aperture_theta"] / 2
 DATA["4_r"] = d14
-DATA["4_theta"] = DATA["aperture_theta"] / 2
+DATA["4_theta"] = -DATA["aperture_theta"] / 2
 DATA["3_r"] = d13
-DATA["3_theta"] = DATA["2_theta"] + a213
+DATA["3_theta"] = -DATA["2_theta"] + a213
 
 DATA["dist_12"] = d12
 DATA["dist_34"] = d34

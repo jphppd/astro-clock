@@ -10,17 +10,14 @@ module moon_to_zodiac() {
       spoke();
   }
   mirror([0, 0, 1]) {
+    circular_shaft(r=moon_to_zodiac_2_r, theta=moon_to_zodiac_2_theta, length=carrier_2_offset - carrier_1_offset - 1);
     circular_shaft(r=moon_to_zodiac_2_r, theta=moon_to_zodiac_2_theta, length=1, radius=gears_shaft_radius + spacer_sleeve);
+    circular_shaft(r=moon_to_zodiac_3_r, theta=moon_to_zodiac_3_theta, length=carrier_2_offset - carrier_1_offset - 1);
+    circular_shaft(r=moon_to_zodiac_4_r, theta=moon_to_zodiac_4_theta, length=carrier_2_offset - carrier_1_offset - 1);
   }
 }
 
 module moon_to_zodiac_drill() {
-  translate([0, 0, layer_thickness])
-    mirror([0, 0, 1]) {
-      circular_hole(r=moon_to_zodiac_2_r, theta=moon_to_zodiac_2_theta, length=4);
-      circular_hole(r=moon_to_zodiac_3_r, theta=moon_to_zodiac_3_theta, length=3);
-      circular_hole(r=moon_to_zodiac_4_r, theta=moon_to_zodiac_4_theta, length=2);
-    }
   circular_hole(r=carrier_outer_radius, theta=0);
 }
 

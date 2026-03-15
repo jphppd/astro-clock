@@ -28,15 +28,15 @@ module circular_hole(radius = gears_shaft_radius, length = 1, r = 0, theta = 0, 
 module hex_shaft(apothem = undef, circumradius = undef, length = 1, r = 0, theta = 0, stellation_ratio = undef, stellation_radius = undef)
   circular_shaft(
     radius=(is_undef(apothem) && !is_undef(circumradius)) ? circumradius
-    : (!is_undef(apothem) && is_undef(circumradius)) ? apothem / cos(180 / 6) : undef, length=length, r=r, theta=theta, stellation_ratio=is_undef(stellation_ratio) && is_undef(stellation_radius)? cos(180/6) : 
-  stellation_ratio, stellation_radius=stellation_radius, n=6
+    : (!is_undef(apothem) && is_undef(circumradius)) ? apothem / cos(180 / 6) : undef, length=length, r=r, theta=theta, stellation_ratio=is_undef(stellation_ratio) && is_undef(stellation_radius) ? cos(180 / 6)
+    : stellation_ratio, stellation_radius=stellation_radius, n=6
   );
 
 module hex_hole(apothem = undef, circumradius = undef, length = 1, r = 0, theta = 0, stellation_ratio = undef, stellation_radius = undef)
   circular_hole(
     radius=(is_undef(apothem) && !is_undef(circumradius)) ? circumradius
-    : (!is_undef(apothem) && is_undef(circumradius)) ? apothem / cos(180 / 6) : undef, length=length, r=r, theta=theta, stellation_ratio=is_undef(stellation_ratio) && is_undef(stellation_radius)? cos(180/6) : 
-  stellation_ratio, stellation_radius=stellation_radius, n=6
+    : (!is_undef(apothem) && is_undef(circumradius)) ? apothem / cos(180 / 6) : undef, length=length, r=r, theta=theta, stellation_ratio=is_undef(stellation_ratio) && is_undef(stellation_radius) ? cos(180 / 6)
+    : stellation_ratio, stellation_radius=stellation_radius, n=6
   );
 
 module dovetail() translate([0, 1 / 8, 0])

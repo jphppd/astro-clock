@@ -9,15 +9,11 @@ import re
 sys.path.append(str(Path(__file__).parent.absolute()))
 
 
-from utils.constants.clock_to_sun.structure import DATA as CLOCK_TO_SUN_STRUCT
-from utils.constants.moon_to_zodiac.structure import DATA as MOON_TO_ZODIAC_STRUCT
-from utils.constants.sun_to_lunar_nodes.structure import (
-    DATA as SUN_TO_LUNAR_NODES_STRUCT,
-)
-from utils.constants.sun_to_lunar_phases.structure import (
-    DATA as SUN_TO_LUNAR_PHASES_STRUCT,
-)
-from utils.constants.sun_to_moon.structure import DATA as SUN_TO_MOON_STRUCT
+from utils.constants.clock_to_sun.structure import DATA as CLK_SUN_STR
+from utils.constants.moon_to_zodiac.structure import DATA as MOON_ZODIAC_STR
+from utils.constants.sun_to_lunar_nodes.structure import DATA as SUN_LUNAR_N_STR
+from utils.constants.sun_to_lunar_phases.structure import DATA as SUN_LUNAR_PH_STR
+from utils.constants.sun_to_moon.structure import DATA as SUN_MOON_STR
 from utils.constants.constants import DATA as CONSTANTS
 from utils.constants.structure import DATA as STRUCT_CONSTANTS
 
@@ -32,22 +28,16 @@ OFFSET_MOON_TO_ZODIAC = OFFSET_SUN_TO_MOON + 1
 OFFSET_CARRIER["1"] = OFFSET_SUN_TO_MOON - 1
 OFFSET_CLOCK_TO_SUN = OFFSET_CARRIER["2"] + 1
 OFFSET_SUN_TO_LUNAR_PHASES = OFFSET_CLOCK_TO_SUN
-OFFSET_SUN_TO_LUNAR_NODES = OFFSET_SUN_TO_LUNAR_PHASES + 4
+OFFSET_SUN_TO_LUNAR_NODES = OFFSET_SUN_TO_LUNAR_PHASES + 3
 OFFSET_CARRIER["3"] = OFFSET_SUN_TO_LUNAR_NODES + 2
 OFFSET_TYMPAN = OFFSET_CARRIER["3"] + 1
 
 STRUCT = {
-    "sun_to_moon": {"offset": OFFSET_SUN_TO_MOON, **SUN_TO_MOON_STRUCT},
-    "moon_to_zodiac": {"offset": OFFSET_MOON_TO_ZODIAC, **MOON_TO_ZODIAC_STRUCT},
-    "clock_to_sun": {"offset": OFFSET_CLOCK_TO_SUN, **CLOCK_TO_SUN_STRUCT},
-    "sun_to_lunar_phases": {
-        "offset": OFFSET_SUN_TO_LUNAR_PHASES,
-        **SUN_TO_LUNAR_PHASES_STRUCT,
-    },
-    "sun_to_lunar_nodes": {
-        "offset": OFFSET_SUN_TO_LUNAR_NODES,
-        **SUN_TO_LUNAR_NODES_STRUCT,
-    },
+    "sun_to_moon": {"offset": OFFSET_SUN_TO_MOON, **SUN_MOON_STR},
+    "moon_to_zodiac": {"offset": OFFSET_MOON_TO_ZODIAC, **MOON_ZODIAC_STR},
+    "clock_to_sun": {"offset": OFFSET_CLOCK_TO_SUN, **CLK_SUN_STR},
+    "sun_to_lunar_phases": {"offset": OFFSET_SUN_TO_LUNAR_PHASES, **SUN_LUNAR_PH_STR},
+    "sun_to_lunar_nodes": {"offset": OFFSET_SUN_TO_LUNAR_NODES, **SUN_LUNAR_N_STR},
 }
 
 
@@ -240,10 +230,10 @@ def position_shafts(parts):
     translate_xyz(
         lunar_phases_shaft,
         0,
-        (SUN_TO_LUNAR_PHASES_STRUCT["gears"]["6_n"] / 2 + 1)
-        * SUN_TO_LUNAR_PHASES_STRUCT["gears"]["5b_6_mod"],
-        (SUN_TO_LUNAR_PHASES_STRUCT["gears"]["6_n"] / 2 + 1)
-        * SUN_TO_LUNAR_PHASES_STRUCT["gears"]["5b_6_mod"],
+        (SUN_LUNAR_PH_STR["gears"]["6_n"] / 2 + 1)
+        * SUN_LUNAR_PH_STR["gears"]["5b_6_mod"],
+        (SUN_LUNAR_PH_STR["gears"]["6_n"] / 2 + 1)
+        * SUN_LUNAR_PH_STR["gears"]["5b_6_mod"],
     )
 
 
@@ -276,10 +266,10 @@ def position_gears(parts):
     translate_xyz(
         sun_to_lunar_phases_gear_6,
         0,
-        (SUN_TO_LUNAR_PHASES_STRUCT["gears"]["6_n"] / 2 + 1)
-        * SUN_TO_LUNAR_PHASES_STRUCT["gears"]["5b_6_mod"],
-        (SUN_TO_LUNAR_PHASES_STRUCT["gears"]["6_n"] / 2 + 1)
-        * SUN_TO_LUNAR_PHASES_STRUCT["gears"]["5b_6_mod"],
+        (SUN_LUNAR_PH_STR["gears"]["6_n"] / 2 + 1)
+        * SUN_LUNAR_PH_STR["gears"]["5b_6_mod"],
+        (SUN_LUNAR_PH_STR["gears"]["6_n"] / 2 + 1)
+        * SUN_LUNAR_PH_STR["gears"]["5b_6_mod"],
     )
 
 
@@ -326,11 +316,11 @@ def position_structure_carrier_components(parts, carrier_idx):
         OFFSET_CARRIER[carrier_idx] * LAYER_THICKNESS,
     )
     sectors = {
-        "clock_to_sun": CLOCK_TO_SUN_STRUCT,
-        "sun_to_moon": SUN_TO_MOON_STRUCT,
-        "sun_to_lunar_phases": SUN_TO_LUNAR_PHASES_STRUCT,
-        "moon_to_zodiac": MOON_TO_ZODIAC_STRUCT,
-        "sun_to_lunar_nodes": SUN_TO_LUNAR_NODES_STRUCT,
+        "clock_to_sun": CLK_SUN_STR,
+        "sun_to_moon": SUN_MOON_STR,
+        "sun_to_lunar_phases": SUN_LUNAR_PH_STR,
+        "moon_to_zodiac": MOON_ZODIAC_STR,
+        "sun_to_lunar_nodes": SUN_LUNAR_N_STR,
     }
 
     for sector_name, sector in sectors.items():

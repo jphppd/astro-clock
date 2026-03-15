@@ -6,7 +6,7 @@ DATA = {
     "2b_3a_mod": 1.7,
     "3b_4a_mod": 1.8,
     "4b_5a_mod": 1.18,
-    "5b_6_mod": 1.5,
+    "5b_6_mod": 1.2,
     "1_n": 40,
     "2a_n": 50,
     "2b_n": 20,
@@ -15,16 +15,9 @@ DATA = {
     "4a_n": 45,
     "4b_n": 20,
     "5a_n": 84,
-    "5b_n": 15,
-    "6_n": 15,
+    "5b_n": 21,
+    "6_n": 21,
 }
-
-# DATA["3b_4a_mod"] = (
-#    DATA["2b_3a_mod"] * (DATA["2b_n"] + DATA["3a_n"]) / (DATA["3b_n"] + DATA["4a_n"])
-# )
-# DATA["4b_5a_mod"] = (
-#    DATA["2b_3a_mod"] * (DATA["2b_n"] + DATA["3a_n"]) / (DATA["4b_n"] + DATA["5a_n"])
-# )
 
 DATA["bevel_offset"] = (
     (sin(pi / 4 + 1 / 20 + 2.2173 / DATA["6_n"]) - sin(pi / 4))

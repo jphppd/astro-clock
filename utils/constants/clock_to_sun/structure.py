@@ -1,6 +1,10 @@
 import math
-import sympy
 from . import env
+
+
+def cosine_law_alpha(b, c, a):
+    return math.acos((b * b + c * c - a * a) / (2 * b * c))
+
 
 DATA = {
     "theta": 17 / 10 * math.pi,
@@ -13,101 +17,69 @@ DATA = {
     "6a_offset": 3,
 }
 
-#
-#       A[4,6]
-# O[7]        B[3,5]
-#                 C[2]
-#                  D[1]
-
-rOA = (env.DATA["6b_n"] + env.DATA["7_n"]) * env.DATA["6b_7_mod"] / 2
-rAB = (env.DATA["3b_n"] + env.DATA["4a_n"]) * env.DATA["3b_4a_mod"] / 2
-rBC = (env.DATA["3a_n"] + env.DATA["2b_n"]) * env.DATA["2b_3a_mod"] / 2
-rCD = (env.DATA["1_n"] + env.DATA["2a_n"]) * env.DATA["1_2a_mod"] / 2
+#        A[7]
+# O[8       B[4,6]
+#        C[3,5]
+#    D[2]
+# E[1]
 
 
-rOD = 134 / 0.75
-rOD = 115 / 0.75
-thetaOA = math.radians(-27) - DATA["theta"]
-thetaAB = math.radians(-90) - DATA["theta"]
-thetaOD = -math.radians(90) - DATA["theta"]
+rOA = (env.DATA["7_n"] + env.DATA["8_n"]) * env.DATA["6b_7_8_mod"] / 2
+rAB = (env.DATA["6b_n"] + env.DATA["7_n"]) * env.DATA["6b_7_8_mod"] / 2
+rBC = (env.DATA["5b_n"] + env.DATA["6a_n"]) * env.DATA["5b_6a_mod"] / 2
+rCD = (env.DATA["2b_n"] + env.DATA["3a_n"]) * env.DATA["2b_3a_mod"] / 2
+rDE = (env.DATA["1_n"] + env.DATA["2a_n"]) * env.DATA["1_2a_mod"] / 2
 
+rOE = 110 / 0.75
+rOD = rOE
+rOC = rOE
+rOB = rOE
 
-xOA, yOA, xAB, yAB, xBC, yBC, xCD, yCD, xOD, yOD = sympy.symbols(
-    "xOA yOA xAB yAB xBC yBC xCD yCD xOD yOD"
-)
-
-xOA = rOA * math.cos(thetaOA)
-yOA = rOA * math.sin(thetaOA)
-xAB = rAB * math.cos(thetaAB)
-yAB = rAB * math.sin(thetaAB)
-xOD = rOD * math.cos(thetaOD)
-yOD = rOD * math.sin(thetaOD)
-
-F = [
-    xBC**2 + yBC**2 - rBC**2,
-    xCD**2 + yCD**2 - rCD**2,
-    xOA + xAB + xBC + xCD - xOD,
-    yOA + yAB + yBC + yCD - yOD,
-]
-gb = sympy.groebner(F, xBC, yBC, xCD, yCD, order="grlex")
-
-value_yCD, value_xBC = sympy.solve_poly_system(gb[0:2], yCD, xBC)[0]  # type: ignore
-rules = {yCD: value_yCD, xBC: value_xBC}
-
-value_xCD, value_yBC = sympy.solve_poly_system(  # type: ignore
-    [gb[2].subs(rules), gb[3].subs(rules)], xCD, yBC
-)[0]  # type: ignore
-
-
-xOA = float(xOA)
-xOB = float(xOA + xAB)
-xOC = float(xOB + value_xBC)
-xOD = float(xOC + value_xCD)
-yOA = float(yOA)
-yOB = float(yOA + yAB)
-yOC = float(yOB + value_yBC)
-yOD = float(yOC + value_yCD)
-
-rOA = math.hypot(xOA, yOA)
-rOB = math.hypot(xOB, yOB)
-rOC = math.hypot(xOC, yOC)
-rOD = math.hypot(xOD, yOD)
-thetaOA = math.atan2(yOA, xOA)
-thetaOB = math.atan2(yOB, xOB)
-thetaOC = math.atan2(yOC, xOC)
-thetaOD = math.atan2(yOD, xOD)
+thetaOE = -math.radians(90) - DATA["theta"]
+thetaOD = thetaOE + cosine_law_alpha(rOD, rOE, rDE)
+thetaOC = thetaOD + cosine_law_alpha(rOC, rOD, rCD)
+thetaOB = thetaOC + cosine_law_alpha(rOB, rOC, rBC)
+thetaOA = thetaOB + cosine_law_alpha(rOA, rOB, rAB)
 
 assert not math.isnan(rOA)
 assert not math.isnan(rOB)
 assert not math.isnan(rOC)
 assert not math.isnan(rOD)
-
+assert not math.isnan(rOE)
+assert not math.isnan(thetaOA)
+assert not math.isnan(thetaOB)
+assert not math.isnan(thetaOC)
+assert not math.isnan(thetaOD)
+assert not math.isnan(thetaOE)
 
 DATA = {
     **DATA,
-    "1_r": rOD,
-    "2_r": rOC,
-    "2a_r": rOC,
-    "2b_r": rOC,
-    "3_r": rOB,
-    "4_r": rOA,
-    "5_r": rOB,
-    "6a_r": rOA,
-    "6b_r": rOA,
-    "7_r": 0.0,
-    "1_theta": thetaOD,
-    "2_theta": thetaOC,
-    "2a_theta": thetaOC,
-    "2b_theta": thetaOC,
-    "3_theta": thetaOB,
-    "4_theta": thetaOA,
-    "5_theta": thetaOB,
-    "6a_theta": thetaOA,
-    "6b_theta": thetaOA,
-    "7_theta": 0,
-    "dist_25": rBC,
-    "dist_36": rAB,
-    "dist_67": rOA,
-    "dist_24": math.hypot(xOC - xOA, yOC - yOA),
+    "1_r": rOE,
+    "2_r": rOD,
+    "2a_r": rOD,
+    "2b_r": rOD,
+    "3_r": rOC,
+    "4_r": rOB,
+    "5_r": rOC,
+    "6_r": rOB,
+    "6a_r": rOB,
+    "6b_r": rOB,
+    "7_r": rOA,
+    "8_r": 0.0,
+    "1_theta": thetaOE,
+    "2_theta": thetaOD,
+    "2a_theta": thetaOD,
+    "2b_theta": thetaOD,
+    "3_theta": thetaOC,
+    "4_theta": thetaOB,
+    "5_theta": thetaOC,
+    "6a_theta": thetaOB,
+    "6b_theta": thetaOB,
+    "7_theta": thetaOA,
+    "8_theta": 0.0,
+    "dist_AB": rAB,
+    "dist_BC": rBC,
+    "dist_CD": rCD,
+    "dist_DE": rDE,
     "gears": env.DATA,
 }

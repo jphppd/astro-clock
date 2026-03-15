@@ -5,25 +5,25 @@ include <../../../utils/constants/constants.scad>
 include <../../../utils/constants/structure.scad>
 
 module clock_to_sun() {
-  for (angle = [clock_to_sun_2_theta, clock_to_sun_3_theta, clock_to_sun_4_theta]) {
+  for (angle = [clock_to_sun_2_theta, clock_to_sun_3_theta, clock_to_sun_4_theta, clock_to_sun_7_theta, clock_to_sun_8_theta, 2 * clock_to_sun_1_theta - clock_to_sun_2_theta])
     rotate(angle)
       spoke();
-  }
 
   mirror([0, 0, 1]) {
-    circular_shaft(r=clock_to_sun_2_r, theta=clock_to_sun_2_theta, length=5, radius=gears_shaft_radius + spacer_sleeve);
-    circular_shaft(r=clock_to_sun_3_r, theta=clock_to_sun_3_theta, length=2, radius=gears_shaft_radius + spacer_sleeve);
-    circular_shaft(r=clock_to_sun_4_r, theta=clock_to_sun_4_theta, length=2, radius=gears_shaft_radius + spacer_sleeve);
+    circular_shaft(r=clock_to_sun_2_r, theta=clock_to_sun_2_theta, length=4, radius=gears_shaft_radius + spacer_sleeve);
+    circular_shaft(r=clock_to_sun_3_r, theta=clock_to_sun_3_theta, length=1, radius=gears_shaft_radius + spacer_sleeve);
+    circular_shaft(r=clock_to_sun_4_r, theta=clock_to_sun_4_theta, length=1, radius=gears_shaft_radius + spacer_sleeve);
+    circular_shaft(r=clock_to_sun_7_r, theta=clock_to_sun_7_theta, length=4, radius=gears_shaft_radius + spacer_sleeve);
   }
 }
 
 module clock_to_sun_drill() {
-  translate([0, 0, layer_thickness])
+  translate([0, 0, half_allowance])
     mirror([0, 0, 1]) {
-      circular_hole(r=clock_to_sun_4_r, theta=clock_to_sun_4_theta, length=7);
-      circular_hole(r=clock_to_sun_3_r, theta=clock_to_sun_3_theta, length=7);
-      translate([0, 0, 3 * layer_thickness - half_allowance])
-        circular_hole(r=clock_to_sun_2_r, theta=clock_to_sun_2_theta, length=4);
+      circular_hole(r=clock_to_sun_2_r, theta=clock_to_sun_2_theta, length=carrier_2_width);
+      circular_hole(r=clock_to_sun_3_r, theta=clock_to_sun_3_theta, length=carrier_2_width);
+      circular_hole(r=clock_to_sun_4_r, theta=clock_to_sun_4_theta, length=carrier_2_width);
+      circular_hole(r=clock_to_sun_7_r, theta=clock_to_sun_7_theta, length=carrier_2_width);
     }
   circular_hole(r=carrier_outer_radius, theta=0);
 }

@@ -2,9 +2,6 @@ include <../../../utils/machining.scad>
 include <../../../utils/structure.scad>
 include <../../../utils/constants/constants.scad>
 include <../../../utils/constants/structure.scad>
-include <../../../utils/constants/clock_to_sun/structure.scad>
-
-clamp_angle = 360 / 10 + clock_to_sun_2_theta;
 
 module arc(demi_angle, r1, r2) polygon(
     [
@@ -53,13 +50,18 @@ module clamp() translate([-carrier_outer_radius, 0, 0]) {
     centering_claw((carrier_3_offset + carrier_2_offset + 1) / 2, (carrier_2_offset - carrier_1_offset) / 3);
   }
 
-module arc_support(overhead) let (r1 = carrier_outer_radius + outer_annulus_sagitta / 2, r2 = carrier_outer_radius + outer_annulus_sagitta / 2 + overhead, theta1 = -clamp_angle - arc_half_angle_claw, theta2 = clamp_angle + arc_half_angle_claw)
+module arc_support(clamp_angle, overhead) let (
+    r1 = carrier_outer_radius + outer_annulus_sagitta / 2,
+    r2 = carrier_outer_radius + outer_annulus_sagitta / 2 + overhead,
+    theta1 = -clamp_angle - arc_half_angle_claw,
+    theta2 = clamp_angle + arc_half_angle_claw
+  )
   rotate(-90)
     linear_extrude(layer_thickness)
       polygon(
         concat(
           [
-            for (theta = [theta1:(theta2 - theta1) / 32:theta2]) [r1 * cos(theta), r1 * sin(theta)],
+            for (theta = [theta1:(theta2 - theta1) / 64:theta2]) [r1 * cos(theta), r1 * sin(theta)],
           ], [
             for (theta = [theta2, theta1]) [r2, r2 * tan(theta)],
           ]
