@@ -225,7 +225,7 @@ def position_shafts(parts):
         STRUCT["sun_to_lunar_phases"]["offset"] * LAYER_THICKNESS,
     )
     lunar_phases_shaft = parts["shafts"]["lunar_phases_shaft"]
-    rotate(lunar_phases_shaft, -pi / 2, "Y")
+    rotate(lunar_phases_shaft, pi / 2, "Y")
     translate_xyz(lunar_phases_shaft, 0, 0, CONSTANTS["gear_thickness"])
     translate_xyz(
         lunar_phases_shaft,
@@ -261,7 +261,7 @@ def position_gears(parts):
         "sun_to_lunar_phases_gear_6"
     ]
     rotate(sun_to_lunar_phases_gear_6, pi / 2, "X")
-    rotate(sun_to_lunar_phases_gear_6, pi / 2, "Y")
+    rotate(sun_to_lunar_phases_gear_6, -pi / 2, "Y")
     translate_xyz(sun_to_lunar_phases_gear_6, 0, 0, CONSTANTS["gear_thickness"])
     translate_xyz(
         sun_to_lunar_phases_gear_6,

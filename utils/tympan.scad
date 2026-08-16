@@ -48,10 +48,10 @@ function fn_almucantar(obs_latitude, almucantar_altitude, scale_factor = 1) =
     [sin(obs_latitude), 0, cos(obs_latitude)], sin(almucantar_altitude), scale_factor
   );
 
-function fn_great_circle(latitude, scale_factor = 1) =
+function fn_great_circle(obs_latitude, azimuth, scale_factor = 1) =
   fn_proj_circle(
     //
-    [sin(latitude), 0, cos(latitude)], 0, scale_factor
+    [sin(azimuth), cos(azimuth), 0], 0, scale_factor
   );
 
 function fn_circle_intersection(circle1, circle2) =
